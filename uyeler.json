@@ -1,0 +1,52 @@
+[
+  {
+    "role": "Danışman Öğretmen",
+    "name": "Asiye Baki",
+    "desc": "Bilgisayar Bilimleri Öğretmeni"
+  },
+  {
+    "role": "Takım Kaptanı",
+    "name": "Mustafa Taha Avcı",
+    "desc": "10.Sınıf Öğrencisi"
+  },
+  {
+    "role": "Yazılım Ekibi Kaptanı",
+    "name": "Muhammed Sediq Sadık",
+    "desc": "11.Sınıf Öğrencisi"
+  },
+  {
+    "role": "Mekanik Ekibi Kaptanı",
+    "name": "Efe Demirler",
+    "desc": "Hazırlık Sınıfı Öğrencisi"
+  },
+  {
+    "role": "Mekanik Ekibi Üyesi",
+    "name": "Ela Kalıç",
+    "desc": "Hazırlık Sınıfı Öğrencisi"
+  },
+  {
+    "role": "Mekanik Ekibi Üyesi",
+    "name": "Ada Cemre Lokmacı",
+    "desc": "9.Sınıf Öğrencisi"
+  },
+  {
+    "role": "Tasarım Ekibi Kaptanı",
+    "name": "Yiğit Alp Sezgin",
+    "desc": "Hazırlık Sınıfı Öğrencisi"
+  },
+  {
+    "role": "Tasarım Ekibi Üyesi",
+    "name": "Çağan Arda Alay",
+    "desc": "Hazırlık Sınıfı Öğrencisi"
+  },
+  {
+    "role": "Elektronik Ekibi Kaptanı",
+    "name": "Yusuf Sucu",
+    "desc": "10.Sınıf Öğrencisi"
+  },
+  {
+    "role": "Elektronik Ekibi Üyesi",
+    "name": "Berat Gökgöz",
+    "desc": "Hazırlık Sınıfı Öğrencisi"
+  }
+]

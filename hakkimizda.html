@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="./css/navbar.css" />
     <link rel="stylesheet" href="./css/footer.css" />
     <link rel="stylesheet" href="./css/body.css" />
-    <link rel="stylesheet" href="./css/sponsorluk.css" />
     <link rel="stylesheet" href="./css/hakkimizda.css" />
     <script
       src="https://kit.fontawesome.com/8c1dbeb99f.js"
@@ -31,7 +30,7 @@
         <ul>
           <li><a href="./sponsorluk.html">Sponsorluk</a></li>
           <li><a href="#">Haberler</a></li>
-          <li><a href="#">Hakkımızda</a></li>
+          <li><a href="./hakkimizda.html">Hakkımızda</a></li>
           <li><a href="#">İletişim</a></li>
         </ul>
       </nav>
@@ -53,26 +52,26 @@
         </article>
         <h1>Takım Üyeleri:</h1>
         <br />
-        <div class="uye">
-          <img
-            src="https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png"
-          />
-          <div>
-            <h1>Danışman Öğretmen</h1>
-            <h2>Asiye Baki</h2>
-            Bilgisayar Bilimleri Öğretmeni
-          </div>
-        </div>
-        <div class="uye">
-          <img
-            src="https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png"
-          />
-          <div>
-            <h1>Takım Kaptanı</h1>
-            <h2>Mustafa Taha Avcı</h2>
-            10.Sınıf Öğrencisi
-          </div>
-        </div>
+        <div id="uyeler"></div>
+        <script>
+          fetch("./uyeler.json").then((res) =>
+            res.json().then((jsonres) =>
+              jsonres.forEach((x) => {
+                document.querySelector("div#uyeler").innerHTML += `
+            <div class="uye">
+              <img
+              src="https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png"/>
+              <div>
+                <h1>${x.role}</h1>
+                <h2>${x.name}</h2>
+                ${x.desc}
+              </div>
+            </div>
+            `;
+              })
+            )
+          );
+        </script>
       </section>
       <br />
       <br />
