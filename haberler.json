@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Örnek Haber",
+    "thumb": "./images/calrovlogo.png",
+    "summary": "CALROV ekibi atölye çalışmalarına başladı",
+    "link": "./haber?id=1",
+    "content": "<h1>Test</h1>"
+  }
+]
