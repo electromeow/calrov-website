@@ -36,32 +36,26 @@
       </nav>
       <div id="spacer"></div>
       <section>
-        <div id="haberler">
-          <div class="haber">
-            <a href="link">
-              <img src="thumb" alt="haber görsel" />
-              <h1>başlık</h1>
-              <p>açıklama</p>
-            </a>
-          </div>
-          <script>
-            fetch("./haberler.json").then((res) =>
-              res.json().then((jsonres) => {
-                const haberlerdiv = document.querySelector("div#haberler");
-                for (const haber of jsonres) {
-                  haberlerdiv.innerHTML += `
+        <div id="haberler"></div>
+        <script>
+          fetch("./haberler.json").then((res) =>
+            res.json().then((jsonres) => {
+              const haberlerdiv = document.querySelector("div#haberler");
+              for (const haber of jsonres) {
+                haberlerdiv.innerHTML += `
                 <div class="haber">
                   <a href="${haber.link}">
                     <img src="${haber.thumbnail}" alt="haber görsel" />
-                    <h1>${haber.title}</h1>
-                    <p>${haber.summary}</p>
+                    <div>
+                      <h1>${haber.title}</h1>
+                      <p>${haber.summary}</p>
+                    </div>
                   </a>
                 </div>`;
-                }
-              })
-            );
-          </script>
-        </div>
+              }
+            })
+          );
+        </script>
       </section>
       <br />
       <br />

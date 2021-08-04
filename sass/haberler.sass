@@ -2,11 +2,27 @@
   section
     div#haberler
       div.haber
-        position: relative,
+        position: relative
         border: 3px solid
         border-radius: 10px
         width: 100%
-        img
-          display: inline-block
-          border-radius: 10px
-        
+        @media screen and (max-width: 70em)
+          width: 90%
+        display: inline-block
+        margin-bottom: 2px
+        padding: 1em
+        a
+          display: block
+          text-decoration: none !important
+          color: white
+          img
+            display: inline
+            width: 7em
+            border-radius: 10px
+          div
+            margin-top: 0
+            padding-top: 0
+            display: inline-block
+            vertical-align: top
+            p
+              display: inline
