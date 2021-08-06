@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <title></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/navbar.css" />
@@ -27,7 +28,7 @@
         <i class="fas fa-bars" name="hamburger" onclick="toggleMenu()"></i>
         <ul>
           <li><a href="./sponsorluk.html">Sponsorluk</a></li>
-          <li><a href="#">Haberler</a></li>
+          <li><a href="./haberler.html">Haberler</a></li>
           <li><a href="./hakkimizda.html">Hakkımızda</a></li>
           <li><a href="./iletisim.html">İletişim</a></li>
         </ul>
@@ -35,15 +36,19 @@
       <div id="spacer"></div>
       <section>
         <script>
-            function main(){
+          function main() {
             const urlParams = new URLSearchParams(window.location.search);
-            fetch(`./data/haberler/haber-${urlParams.get("id")}`)
-              .then(res => {return res.json()})
-              .then(jsonres => {
-              jsonres
-              document.querySelector("section").innerHTML += haber[0].content;
-              document.querySelector("title").innerHTML = haber[0].title;
-            }));
+            if (!urlParams.get("id")) return;
+            fetch(`./data/haberler/haber-${urlParams.get("id")}.json`)
+              .then((res) =>
+                res.json().then((jsonres) => {
+                  document.querySelector("section").innerHTML +=
+                    "<h1>" + jsonres.title + "</h1>" + jsonres.content;
+                  document.querySelector("title").innerHTML =
+                    jsonres.title + " - CALROV";
+                })
+              )
+              .catch(console.error);
           }
           main();
         </script>

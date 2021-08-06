@@ -1,7 +1,7 @@
-{  
-    "title": "Örnek Haber",
-    "thumbnail": "./images/calrovlogo.png",
-    "summary": "CALROV ekibi atölye çalışmalarına başladı sghurajoıf  etuagıjr wojıteoag rhojır aerwj",
-    "link": "./haber.html?id=1",
-    "content": "<h1>Test</h1>"
+{
+  "title": "Örnek Haber",
+  "thumbnail": "./images/calrovlogo.png",
+  "summary": "CALROV ekibi atölye çalışmalarına başladı sghurajoıf  etuagıjr wojıteoag rhojır aerwj",
+  "link": "./haber.html?id=1",
+  "content": "<h2>Test</h2><style>h1{font-size: 2em;} h2{font-size: 1.5em;}</style>"
 }
