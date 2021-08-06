@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "sass sass:css"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +12,8 @@
   "devDependencies": {
     "eslint": "^7.26.0",
     "prettier": "^2.3.0"
+  },
+  "dependencies": {
+    "sass": "^1.37.5"
   }
 }
