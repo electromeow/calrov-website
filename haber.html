@@ -4,11 +4,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Haberler</title>
     <link rel="stylesheet" href="./css/navbar.css" />
     <link rel="stylesheet" href="./css/footer.css" />
     <link rel="stylesheet" href="./css/body.css" />
-    <link rel="stylesheet" href="./css/haberler.css" />
     <script
       src="https://kit.fontawesome.com/8c1dbeb99f.js"
       crossorigin="anonymous"
@@ -36,25 +34,18 @@
       </nav>
       <div id="spacer"></div>
       <section>
-        <div id="haberler"></div>
         <script>
-          fetch("./haberler.json").then((res) =>
-            res.json().then((jsonres) => {
-              const haberlerdiv = document.querySelector("div#haberler");
-              for (const haber of jsonres) {
-                haberlerdiv.innerHTML += `
-                <div class="haber">
-                  <a href="${haber.link}">
-                    <img src="${haber.thumbnail}" alt="haber görsel" />
-                    <div>
-                      <h1>${haber.title}</h1>
-                      <p>${haber.summary}</p>
-                    </div>
-                  </a>
-                </div>`;
-              }
-            })
-          );
+            function main(){
+            const urlParams = new URLSearchParams(window.location.search);
+            fetch(`./data/haberler/haber-${urlParams.get("id")}`)
+              .then(res => {return res.json()})
+              .then(jsonres => {
+              jsonres
+              document.querySelector("section").innerHTML += haber[0].content;
+              document.querySelector("title").innerHTML = haber[0].title;
+            }));
+          }
+          main();
         </script>
       </section>
       <br />

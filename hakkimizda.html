@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CALROV</title>
+    <title>Hakkımızda</title>
     <link rel="stylesheet" href="./css/navbar.css" />
     <link rel="stylesheet" href="./css/footer.css" />
     <link rel="stylesheet" href="./css/body.css" />
@@ -54,7 +54,7 @@
         <br />
         <div id="uyeler"></div>
         <script>
-          fetch("./uyeler.json").then((res) =>
+          fetch("./data/uyeler.json").then((res) =>
             res.json().then((jsonres) =>
               jsonres.forEach((x) => {
                 document.querySelector("div#uyeler").innerHTML += `
