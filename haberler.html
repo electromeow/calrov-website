@@ -33,46 +33,14 @@
       <div id="spacer"></div>
       <section>
         <div id="haberler"></div>
-        <script>
-          const urlParams = new URLSearchParams(window.location.search);
-          let p;
-          if (!urlParams.get("p")) {
-            p = 1;
-          } else {
-            p = urlParams.get("p");
-          }
-          const firstpage = parseInt(p) === 1;
-          let lastpage = false;
-          for (let i = p * 5 - 4; i < p * 5 + 1; i++) {
-            if (i === 1) {
-              lastpage = true;
-            }
-            fetch(`./data/haberler/haber-${i}.json`).then((res) =>
-              res.json().then((jsonres) => {
-                document.querySelector(
-                  "div#haberler"
-                ).innerHTML += `<div class="haber"><a href="./haber.html?id=${i}"><img src="${jsonres.thumbnail}" alt="haber küçük resim" /><div><h1>${jsonres.title}</h1><p>${jsonres.summary}</p></a></div>`;
-              })
-            );
-          }
-        </script>
+        <script src="./scripts/haberler.js"></script>
         <br />
         <div id="paginator">
           <a id="leftarrow"><i class="fas fa-chevron-left fa-2x"></i></a>
           <span id="pagenumber"></span>
           <a id="rightarrow"><i class="fas fa-chevron-right fa-2x"></i></a>
         </div>
-        <script>
-          if (!firstpage)
-            document
-              .querySelector("a#leftarrow")
-              .setAttribute("href", `./haberler.html?p=${p - 1}`);
-          document.querySelector("span#pagenumber").innerHTML = p;
-          if (!lastpage)
-            document
-              .querySelector("a#rightarrow")
-              .setAttribute("href", `./haberler.html?p=${p + 1}`);
-        </script>
+        <script src="./scripts/haberler-paginator.js"></script>
       </section>
       <br />
       <br />
