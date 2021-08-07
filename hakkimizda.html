@@ -5,29 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hakkımızda</title>
-    <link rel="stylesheet" href="./css/navbar.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
-    <link rel="stylesheet" href="./css/body.css" />
-    <link rel="stylesheet" href="./css/hakkimizda.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/body.css" />
+    <link rel="stylesheet" href="/css/hakkimizda.css" />
     <script
       src="https://kit.fontawesome.com/8c1dbeb99f.js"
       crossorigin="anonymous"
     ></script>
-    <script src="./scripts/toggleMenu.js"></script>
+    <script src="/scripts/toggleMenu.js"></script>
   </head>
   <body>
     <div class="container">
       <nav>
-        <a href="./">
-          <img src="./images/calrovlogo.png" alt="logo" />
+        <a href="/">
+          <img src="/images/calrovlogo.png" alt="logo" />
           <h1>CALROV</h1>
         </a>
         <i class="fas fa-bars" name="hamburger" onclick="toggleMenu()"></i>
         <ul>
-          <li><a href="./sponsorluk.html">Sponsorluk</a></li>
-          <li><a href="./haberler.html">Haberler</a></li>
-          <li><a href="./hakkimizda.html">Hakkımızda</a></li>
-          <li><a href="./iletisim.html">İletişim</a></li>
+          <li><a href="/sponsorluk.html">Sponsorluk</a></li>
+          <li><a href="/haberler.html">Haberler</a></li>
+          <li><a href="/hakkimizda.html">Hakkımızda</a></li>
+          <li><a href="/iletisim.html">İletişim</a></li>
         </ul>
       </nav>
       <div id="spacer"></div>
@@ -50,7 +50,7 @@
         <br />
         <div id="uyeler"></div>
         <script>
-          fetch("./data/uyeler.json").then((res) =>
+          fetch("/data/uyeler.json").then((res) =>
             res.json().then((jsonres) =>
               jsonres.forEach((x) => {
                 document.querySelector("div#uyeler").innerHTML += `

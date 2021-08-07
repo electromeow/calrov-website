@@ -1,7 +1,7 @@
 function main() {
   const urlParams = new URLSearchParams(window.location.search);
   if (!urlParams.get("id")) return;
-  fetch(`./data/haberler/haber-${urlParams.get("id")}.json`)
+  fetch(`/data/haberler/haber-${urlParams.get("id")}.json`)
     .then((res) =>
       res.json().then((jsonres) => {
         document.querySelector("section").innerHTML +=
