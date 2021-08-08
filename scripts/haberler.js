@@ -13,9 +13,24 @@ for (let i = p * 5 - 4; i < p * 5 + 1; i++) {
   }
   fetch(`/data/haberler/haber-${i}.json`).then((res) =>
     res.json().then((jsonres) => {
-      document.querySelector(
-        "div#haberler"
-      ).innerHTML += `<div class="haber"><a href="/haber.html?id=${i}"><img src="${jsonres.thumbnail}" alt="haber küçük resim" /><div><h1>${jsonres.title}</h1><p>${jsonres.summary}</p></a></div>`;
+      let element = document.createElement("div");
+      element.className = "haber";
+      let link = document.createElement("a");
+      link.setAttribute("href", `/haber.html?id=${i}`);
+      let img = document.createElement("img");
+      img.src = jsonres.thumbnail;
+      img.alt = "haber küçük resim";
+      link.appendChild(img);
+      let div = document.createElement("div");
+      let h1 = document.createElement("h1");
+      h1.appendChild(document.createTextNode(jsonres.title));
+      div.appendChild(h1);
+      let p = document.createElement("p");
+      p.appendChild(document.createTextNode(jsonres.summary));
+      div.appendChild(p);
+      link.appendChild(div);
+      element.appendChild(link);
+      document.querySelector("div#haberler").appendChild(element);
     })
   );
 }
