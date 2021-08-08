@@ -3,3 +3,7 @@ node_modules/
 css/
 package-lock.json
 .vscode/
+fontawesome/*.ttf
+fontawesome/*.woff
+fontawesome/*.woff2
+fontawesome/fontawesome.min.css
