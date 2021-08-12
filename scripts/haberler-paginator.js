@@ -1,3 +1,5 @@
+console.log("Lastpage "+lastpage);
+console.log("Firstpage "+firstpage);
 if (!firstpage)
   document
     .querySelector("a#leftarrow")
