@@ -5,9 +5,11 @@ if (!urlParams.get("p")) {
 } else {
   p = urlParams.get("p");
 }
+p = parseInt(p);
 const firstpage = parseInt(p) === 1;
 let lastpage = false;
-for (let i = p * 5 - 4; i < p * 5 + 1; i++) {
+for (let i = p * 5; i > p * 5 - 5; i--) {
+  console.log(p);
   if (i === 1) {
     lastpage = true;
   }
