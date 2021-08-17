@@ -1,52 +1,52 @@
 [
   {
     "role": "Danışman Öğretmen",
-    "name": "Asiye Baki",
+    "name": "Asiye BAKİ",
     "desc": "Bilgisayar Öğretmeni"
   },
   {
     "role": "Takım Kaptanı",
-    "name": "Mustafa Taha Avcı",
-    "desc": "10.Sınıf Öğrencisi"
+    "name": "Mustafa Taha AVCI",
+    "desc": "165. Dönem Öğrencisi"
   },
   {
     "role": "Yazılım Ekibi Kaptanı",
-    "name": "Muhammed Sediq Sadık",
-    "desc": "11.Sınıf Öğrencisi"
-  },
-  {
-    "role": "Mekanik Ekibi Kaptanı",
-    "name": "Efe Demirler",
-    "desc": "Hazırlık Sınıfı Öğrencisi"
-  },
-  {
-    "role": "Mekanik Ekibi Üyesi",
-    "name": "Ela Kalıç",
-    "desc": "Hazırlık Sınıfı Öğrencisi"
-  },
-  {
-    "role": "Mekanik Ekibi Üyesi",
-    "name": "Ada Cemre Lokmacı",
-    "desc": "9.Sınıf Öğrencisi"
+    "name": "Mohammad Sediq SADIQ",
+    "desc": "164. Dönem Öğrencisi"
   },
   {
     "role": "Tasarım Ekibi Kaptanı",
-    "name": "Yiğit Alp Sezgin",
-    "desc": "Hazırlık Sınıfı Öğrencisi"
+    "name": "Yiğit Alp SEZGİN",
+    "desc": "167. Dönem Öğrencisi"
   },
   {
     "role": "Tasarım Ekibi Üyesi",
-    "name": "Çağan Arda Alay",
-    "desc": "Hazırlık Sınıfı Öğrencisi"
+    "name": "Çağan Arda ALAY",
+    "desc": "167. Dönem Öğrencisi"
+  },
+  {
+    "role": "Mekanik Ekibi Kaptanı",
+    "name": "Efe DEMİRLER",
+    "desc": "167. Dönem Öğrencisi"
+  },
+  {
+    "role": "Mekanik Ekibi Üyesi",
+    "name": "Ela KALIÇ",
+    "desc": "167. Dönem Öğrencisi"
+  },
+  {
+    "role": "Mekanik Ekibi Üyesi",
+    "name": "Ada Cemre LOKMACI",
+    "desc": "166. Dönem Öğrencisi"
   },
   {
     "role": "Elektronik Ekibi Kaptanı",
-    "name": "Yusuf Sucu",
-    "desc": "10.Sınıf Öğrencisi"
+    "name": "Yusuf SUCU",
+    "desc": "165. Dönem Öğrencisi"
   },
   {
     "role": "Elektronik Ekibi Üyesi",
-    "name": "Berat Gökgöz",
-    "desc": "Hazırlık Sınıfı Öğrencisi"
+    "name": "Berat GÖKGÖZ",
+    "desc": "167. Dönem Öğrencisi"
   }
 ]
