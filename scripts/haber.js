@@ -9,6 +9,7 @@ function main() {
           let element = document.createElement("h1");
           element.appendChild(document.createTextNode(jsonres.title));
           let section = document.querySelector("section");
+          document.querySelector("head meta[name=description]").setAttribute("content", jsonres.summary);
           section.appendChild(element);
           section.innerHTML += jsonres.content;
           document.title = jsonres.title + " - CALROV";
