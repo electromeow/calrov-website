@@ -13,6 +13,12 @@ function main() {
           section.appendChild(element);
           section.innerHTML += jsonres.content;
           document.title = jsonres.title + " - CALROV";
+          document.getElementsByName("twitter:title")[0].setAttribute("content", jsonres.title);
+          document.getElementsByName("og:title")[0].setAttribute("content", jsonres.title);
+          document.getElementsByName("twitter:description")[0].setAttribute("content", jsonres.summary);
+          document.getElementsByName("og:description")[0].setAttribute("content", jsonres.summary);
+          document.getElementsByName("twitter:card")[0].setAttribute("content", jsonres.thumbnail);
+          document.getElementsByName("og:url")[0].setAttribute("content", jsonres.link);
         })
         .catch(console.error)
     )
