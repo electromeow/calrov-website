@@ -1,10 +1,8 @@
-# Under Construction
-
 # calrov-website
 
 Source code of the website I made for the Teknofest(a national space&aviation festival with technology
 competitions in lots of categories included in Turkey) team called CALROV that I'm a member of.\
-This is a static website and deployed on Netlify.\
+This is a website built using Flask and uses MongoDB(hosted on MongoDB Atlas) as database. Served thanks to Heroku!\
 
 [www.calrovteam.com](https://www.calrovteam.com)
 
@@ -14,12 +12,18 @@ CALROV is a Teknofest team founded under the hood of Istanbul Cağaloğlu Anatol
 to compete in the Teknofest Remotely Operated Underwater Vehicles category.\
 We are designing a ROV(remotely operated underwater vehicle), hopefully passed the Critical Design Report stage and
 deserved to race at the finals.\
-We hope we'll have a good result.
+\
+At the final, we were the only team managed to complete autonomous
+task(the vehicle should autonomously go through a door, without manual control,
+using image processing, AI and so on...) successfully, and this situation
+gave us the top place of the ranking.\
+Also made a show to display our success in front of Mustafa Varank(Minister of
+Industry and Technology) and Selçuk Bayraktar(owner of BAYKAR, a company of defense industry that produce UAVs).\
+Also deserved to have The Most Unique Software award.
 
 ## Note
 
-I know it's not the best practice to copy-paste the skeleton for each page on the website,
-but I did it to make it possible to host it on a static website hosting platform easily.
+I know it should be much more developed, coming soon...
 
 ## LICENSE
 
