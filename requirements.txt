@@ -1,0 +1,5 @@
+Flask[async]
+aiofiles
+pymongo
+dnspython
+waitress

@@ -1,5 +1,6 @@
-node_modules/
-.DS_Store
-css/
-package-lock.json
-.vscode/
+**/__pycache__/
+venv/
+.idea/
+.atom/
+**/.DS_Store
+database_credentials.json

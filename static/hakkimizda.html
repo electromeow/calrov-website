@@ -68,10 +68,10 @@
         </a>
         <i class="fas fa-bars" name="hamburger" onclick="toggleMenu()"></i>
         <ul>
-          <li><a href="/sponsorluk.html">Sponsorluk</a></li>
-          <li><a href="/haberler.html">Haberler</a></li>
-          <li><a href="/hakkimizda.html">Hakkımızda</a></li>
-          <li><a href="/iletisim.html">İletişim</a></li>
+          <li><a href="/sponsorluk">Sponsorluk</a></li>
+          <li><a href="/haberler">Haberler</a></li>
+          <li><a href="/hakkimizda">Hakkımızda</a></li>
+          <li><a href="/iletisim">İletişim</a></li>
         </ul>
       </nav>
       <div id="spacer"></div>
@@ -94,7 +94,18 @@
         </article>
         <h1>Takım Üyeleri:</h1>
         <br />
-        <div id="uyeler"></div>
+        <div id="uyeler">
+          {% for uye in uyeler %}
+            <div class="uye">
+              <img src="https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png" />
+              <div>
+                <h1>{{ uye["role"] }}</h1>
+                <h2>{{ uye["name"] }}</h2>
+                {{ uye["desc"] }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
         <script>
           fetch("/data/uyeler.json").then((res) =>
             res.json().then((jsonres) =>

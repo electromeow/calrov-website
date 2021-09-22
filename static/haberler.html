@@ -4,20 +4,20 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>İletişim - CALROV</title>
+    <title>Haberler - CALROV</title>
     <meta
       name="keywords"
-      content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç, iletişim, bilgiler"
+      content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç, haber, haberler"
     />
     <meta
       name="description"
-      content="Bu sayfada CALROV takımı ile iletişim kurabileceğiniz iletişim bilgileri bulunmaktadır."
+      content="CALROV takımından haberleri bu sayfadan takip edebilirsiniz."
     />
-    <meta name="og:title" property="og:title" content="İletişim - CALROV" />
+    <meta name="og:title" property="og:title" content="Haberler - CALROV" />
     <meta
       name="og:description"
       property="og:description"
-      content="Bu sayfada CALROV takımı ile iletişim kurabileceğiniz iletişim bilgileri bulunmaktadır."
+      content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kateogirisinde yarışmak üzere kurulmuş bir takımdır."
     />
     <meta
       property="og:image"
@@ -27,19 +27,19 @@
     <meta
       property="og:url"
       name="og:url"
-      content="https://www.calrovteam.com/iletisim.html"
+      content="https://www.calrovteam.com/haberler.html"
     />
     <meta property="og:locale" name="og:locale" content="tr_TR" />
     <meta property="og:site_name" name="og:site_name" content="CALROV" />
     <meta
       name="twitter:title"
       property="twitter:title"
-      content="İletişim - CALROV"
+      content="Haberler - CALROV"
     />
     <meta
       name="twitter:description"
       property="twitter:description"
-      content="Bu sayfada CALROV takımı ile iletişim kurabileceğiniz iletişim bilgileri bulunmaktadır."
+      content="CALROV takımından haberleri bu sayfadan takip edebilirsiniz."
     />
     <meta
       name="twitter:image"
@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/body.css" />
-    <link rel="stylesheet" href="/css/iletisim.css" />
+    <link rel="stylesheet" href="/css/haberler.css" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/fontawesome/fontawesome.min.css" />
     <script src="/scripts/toggleMenu.js"></script>
@@ -68,24 +68,35 @@
         </a>
         <i class="fas fa-bars" name="hamburger" onclick="toggleMenu()"></i>
         <ul>
-          <li><a href="/sponsorluk.html">Sponsorluk</a></li>
-          <li><a href="/haberler.html">Haberler</a></li>
-          <li><a href="/hakkimizda.html">Hakkımızda</a></li>
-          <li><a href="/iletisim.html">İletişim</a></li>
+          <li><a href="/sponsorluk">Sponsorluk</a></li>
+          <li><a href="/haberler">Haberler</a></li>
+          <li><a href="/hakkimizda">Hakkımızda</a></li>
+          <li><a href="/iletisim">İletişim</a></li>
         </ul>
       </nav>
       <div id="spacer"></div>
       <section>
-        <h1>İletişim</h1>
-        E-Posta: <a href="mailto:calrovteam@gmail.com">calrovteam@gmail.com</a
-        ><br />
-        Instagram: <a href="https://instagram.com/calrovteam">@calrovteam</a
-        ><br />
-        Adres:
-        <a
-          href="https://google.com/maps/search/Molla%20Fenari%20Mah.%20Bab-%C4%B1%20Ali%20Cad.%20No%3A1%20Fatih%2F%C4%B0stanbul"
-          >Molla Fenari Mah. Bab-ı Ali Cad. No:1 Fatih/İstanbul</a
-        ><br />
+        <div id="haberler">
+          {% for haber in haberler %}
+            <div class="haber">
+              <a href="{{haber['link']}}">
+                <img src="{{haber['thumbnail']}}" alt="haber küçük resim" />
+                <div>
+                  <h1>{{ haber["title"] }}</h1>
+                  <p>{{ haber["summary"] }}</p>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+        <br />
+        <div id="paginator">
+          <a id="leftarrow" href="{{ ('/haberler?p='+str(pageno-1)) if not firstpage else '#'}}" class="{{'disabled' if firstpage else ''}}"><i class="fas fa-chevron-left fa-2x"></i></a>
+          <span id="pagenumber">{{ pageno }}</span>
+          <a id="rightarrow" href="{{ ('/haberler?p='+str(pageno+1)) if not lastpage else '#'}}" class="{{'disabled' if lastpage else ''}}"><i class="fas fa-chevron-right fa-2x"></i></a>
+        </div>
+        <!-- <script src="/scripts/haberler.js"></script> -->
+
       </section>
       <br />
       <br />
