@@ -138,4 +138,4 @@ async def haberler():
 
 
 if __name__ == "__main__":
-    serve(app, listen="*:8080")
+    serve(app, listen="*:"+str(os.environ["PORT"])
