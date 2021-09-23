@@ -3,9 +3,6 @@ from sass import compile as sass
 from htmlmin import minify as htmlmin
 from jsmin import jsmin
 
-os.system("pwd")
-os.system("ls")
-os.system("cat /app/static/index.html")
 
 try:
     os.mkdir("css")
@@ -34,3 +31,6 @@ for jsfile in os.listdir("scripts"):
         content = f.read()
     with open("scripts/"+jsfile, 'w') as f:
         f.write(jsmin(content, quote_chars="'\"`"))
+os.system("pwd")
+os.system("ls")
+os.system("cat /app/static/index.html")
