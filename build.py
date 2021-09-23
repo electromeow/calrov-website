@@ -3,6 +3,10 @@ from sass import compile as sass
 from htmlmin import minify as htmlmin
 from jsmin import jsmin
 
+os.system("pwd")
+os.system("ls /app/static")
+os.system("cat /app/static/index.html")
+
 try:
     os.mkdir("css")
 except FileExistsError:
