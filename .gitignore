@@ -4,3 +4,6 @@ venv/
 .atom/
 **/.DS_Store
 database_credentials.json
+css/
+static/
+scripts/
