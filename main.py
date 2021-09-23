@@ -8,6 +8,8 @@ import os
 from utils import *
 from waitress import serve
 
+os.system("python3 build.py")
+
 app = Flask(__name__)
 
 db_cred = {

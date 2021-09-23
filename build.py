@@ -31,6 +31,4 @@ for jsfile in os.listdir("scripts"):
         content = f.read()
     with open("scripts/"+jsfile, 'w') as f:
         f.write(jsmin(content, quote_chars="'\"`"))
-os.system("pwd")
-os.system("ls")
-os.system("cat /app/static/index.html")
+        
