@@ -3,3 +3,8 @@ aiofiles
 pymongo
 dnspython
 waitress
+
+# Build deps to compile sass and minify files
+libsass
+htmlmin
+jsmin
