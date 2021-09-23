@@ -21,12 +21,12 @@ sass(dirname=("sass", "css"), output_style="compressed")
 for htmlfile in os.listdir("src/static"):
     with open("src/static/"+htmlfile, 'r') as f:
         content = f.read()
-    with open("src/static/"+htmlfile, 'w') as f:
+    with open("static/"+htmlfile, 'w') as f:
         f.write(htmlmin(content, remove_empty_space=True, remove_comments=True))
 
 
 for jsfile in os.listdir("scripts"):
     with open("src/scripts/"+jsfile, 'r') as f:
         content = f.read()
-    with open("src/scripts/"+jsfile, 'w') as f:
+    with open("scripts/"+jsfile, 'w') as f:
         f.write(jsmin(content, quote_chars="'\"`"))
