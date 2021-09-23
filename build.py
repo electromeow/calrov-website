@@ -26,9 +26,8 @@ for htmlfile in os.listdir("src/static"):
         f.write(htmlmin(content, remove_empty_space=True, remove_comments=True))
 
 
-for jsfile in os.listdir("scripts"):
+for jsfile in os.listdir("src/scripts"):
     with open("src/scripts/"+jsfile, 'r') as f:
         content = f.read()
     with open("scripts/"+jsfile, 'w') as f:
         f.write(jsmin(content, quote_chars="'\"`"))
-        
