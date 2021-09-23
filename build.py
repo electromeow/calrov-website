@@ -4,7 +4,7 @@ from htmlmin import minify as htmlmin
 from jsmin import jsmin
 
 os.system("pwd")
-os.system("ls /app/static")
+os.system("ls")
 os.system("cat /app/static/index.html")
 
 try:
