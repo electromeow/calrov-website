@@ -2,30 +2,54 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>{{ json_obj["title"] }}</title>
     <meta
       name="keywords"
       content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç, haber"
     />
     <meta name="description" />
-    <meta name="og:title" property="og:title" />
-    <meta name="og:description" property="og:description" />
+    <meta
+      name="og:title"
+      property="og:title"
+      content="{{ json_obj['title'] }}"
+    />
+    <meta
+      name="og:description"
+      property="og:description"
+      content="{{ json_obj['summary'] }}"
+    />
     <meta
       property="og:image"
       name="og:image"
-      content="https://www.calrovteam.com/images/calrovlogo.png"
+      content="https://www.calrovteam.com{{ json_obj['thumbnail'].lstrip('.') }}"
     />
-    <meta property="og:url" name="og:url" />
+    <meta
+      property="og:url"
+      name="og:url"
+      content="https://www.calrovteam.com/haberler/{{ json_obj['_id'] }}"
+    />
     <meta property="og:locale" name="og:locale" content="tr_TR" />
     <meta property="og:site_name" name="og:site_name" content="CALROV" />
-    <meta name="twitter:title" property="twitter:title" />
-    <meta name="twitter:description" property="twitter:description" />
+    <meta
+      name="twitter:title"
+      property="twitter:title"
+      content="{{ json_obj['title'] }}"
+    />
+    <meta
+      name="twitter:description"
+      property="twitter:description"
+      content="{{ json_obj['summary'] }}"
+    />
     <meta
       name="twitter:image"
       property="twitter:image"
       content="https://www.calrovteam.com/images/calrovlogo.png"
     />
-    <meta name="twitter:card" property="twitter:card" />
+    <meta
+      name="twitter:card"
+      property="twitter:card"
+      content="https://www.calrovteam.com{{json_obj['thumbnail']}}"
+    />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/navbar.css" />
@@ -54,9 +78,7 @@
       <div id="spacer"></div>
       <section>
         <h1 class="habertitle">{{json_obj['title']}}</h1>
-        <article>
-          {{json_obj['content']|safe}}
-        </article>
+        <article>{{json_obj['content']|safe}}</article>
       </section>
       <br />
       <br />

@@ -27,7 +27,7 @@
     <meta
       property="og:url"
       name="og:url"
-      content="https://www.calrovteam.com/haberler.html"
+      content="https://www.calrovteam.com/haberler"
     />
     <meta property="og:locale" name="og:locale" content="tr_TR" />
     <meta property="og:site_name" name="og:site_name" content="CALROV" />
@@ -78,25 +78,34 @@
       <section>
         <div id="haberler">
           {% for haber in haberler %}
-            <div class="haber">
-              <a href="{{haber['link']}}">
-                <img src="{{haber['thumbnail']}}" alt="haber küçük resim" />
-                <div>
-                  <h1>{{ haber["title"] }}</h1>
-                  <p>{{ haber["summary"] }}</p>
-                </div>
-              </a>
-            </div>
+          <div class="haber">
+            <a href="{{haber['link']}}">
+              <img src="{{haber['thumbnail']}}" alt="haber küçük resim" />
+              <div>
+                <h1>{{ haber["title"] }}</h1>
+                <p>{{ haber["summary"] }}</p>
+              </div>
+            </a>
+          </div>
           {% endfor %}
         </div>
         <br />
         <div id="paginator">
-          <a id="leftarrow" href="{{ ('/haberler?p='+str(pageno-1)) if not firstpage else '#'}}" class="{{'disabled' if firstpage else ''}}"><i class="fas fa-chevron-left fa-2x"></i></a>
+          <a
+            id="leftarrow"
+            href="{{ ('/haberler?p='+str(pageno-1)) if not firstpage else '#'}}"
+            class="{{'disabled' if firstpage else ''}}"
+            ><i class="fas fa-chevron-left fa-2x"></i
+          ></a>
           <span id="pagenumber">{{ pageno }}</span>
-          <a id="rightarrow" href="{{ ('/haberler?p='+str(pageno+1)) if not lastpage else '#'}}" class="{{'disabled' if lastpage else ''}}"><i class="fas fa-chevron-right fa-2x"></i></a>
+          <a
+            id="rightarrow"
+            href="{{ ('/haberler?p='+str(pageno+1)) if not lastpage else '#'}}"
+            class="{{'disabled' if lastpage else ''}}"
+            ><i class="fas fa-chevron-right fa-2x"></i
+          ></a>
         </div>
         <!-- <script src="/scripts/haberler.js"></script> -->
-
       </section>
       <br />
       <br />
