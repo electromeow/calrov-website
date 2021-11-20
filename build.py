@@ -9,7 +9,7 @@ try:
 except FileExistsError:
     pass
 try:
-    os.mkdir("static")
+    os.mkdir("html")
 except FileExistsError:
     pass
 try:
@@ -17,15 +17,17 @@ try:
 except FileExistsError:
     pass
 
+# Compile SASS files in sass/ folder to css/ folder with minimizing emabled
 sass(dirname=("sass", "css"), output_style="compressed")
 
-for htmlfile in os.listdir("src/static"):
-    with open("src/static/"+htmlfile, 'r') as f:
+# Minimize HTML files in src/html/ folder into html/ folder.
+for htmlfile in os.listdir("src/html"):
+    with open("src/html/"+htmlfile, 'r') as f:
         content = f.read()
-    with open("static/"+htmlfile, 'w') as f:
+    with open("html/"+htmlfile, 'w') as f:
         f.write(htmlmin(content, remove_empty_space=True, remove_comments=True))
 
-
+# Minimize JS files in src/scripts/ into scripts/
 for jsfile in os.listdir("src/scripts"):
     with open("src/scripts/"+jsfile, 'r') as f:
         content = f.read()

@@ -2,43 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>{{ json_obj["title"] }}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ uye["name"] }} {{ uye["surname"].upper() }}</title>
     <meta
       name="keywords"
-      content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç, haber"
+      content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç"
     />
-    <meta name="description" />
     <meta
-      name="og:title"
-      property="og:title"
-      content="{{ json_obj['title'] }}"
+      name="description"
+      content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır."
     />
+    <meta name="og:title" property="og:title" content="Ana Sayfa - CALROV" />
     <meta
       name="og:description"
       property="og:description"
-      content="{{ json_obj['summary'] }}"
+      content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır."
     />
     <meta
       property="og:image"
       name="og:image"
-      content="https://www.calrovteam.com{{ json_obj['thumbnail'].lstrip('.') }}"
+      content="https://www.calrovteam.com/images/calrovlogo.png"
     />
     <meta
       property="og:url"
       name="og:url"
-      content="https://www.calrovteam.com/haberler/{{ json_obj['_id'] }}"
+      content="https://www.calrovteam.com"
     />
     <meta property="og:locale" name="og:locale" content="tr_TR" />
     <meta property="og:site_name" name="og:site_name" content="CALROV" />
     <meta
       name="twitter:title"
       property="twitter:title"
-      content="{{ json_obj['title'] }}"
+      content="Ana Sayfa - CALROV"
     />
     <meta
       name="twitter:description"
       property="twitter:description"
-      content="{{ json_obj['summary'] }}"
+      content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır."
     />
     <meta
       name="twitter:image"
@@ -48,16 +49,14 @@
     <meta
       name="twitter:card"
       property="twitter:card"
-      content="https://www.calrovteam.com{{json_obj['thumbnail']}}"
+      content="https://www.calrovteam.com/images/talay-sualtinda-fotograf.jpg"
     />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/body.css" />
+    <link rel="stylesheet" href="/css/homepage.css" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/fontawesome/fontawesome.min.css" />
-
     <script src="/scripts/toggleMenu.js"></script>
   </head>
   <body>
@@ -77,8 +76,24 @@
       </nav>
       <div id="spacer"></div>
       <section>
-        <h1 class="habertitle">{{json_obj['title']}}</h1>
-        <article>{{json_obj['content']|safe}}</article>
+        <img src="{{ uye['thumbnail'] }}" alt="üye fotoğrafı "/>
+        <h1>{{ uye["name"] }} {{ uye["surname"] }}</h1>
+        <h2>{{ uye["role"] }}</h2>
+        <article>{{ uye["desc"] }}</article>
+        <style type="text/css">
+          section h1 {
+            font-size: 2em;
+          }
+          section h2 {
+            font-size: 1.5em;
+          }
+          section article {
+            font-size: 1.2em;
+          }
+          section img {
+            width: 10em;
+          }
+        </style>
       </section>
       <br />
       <br />

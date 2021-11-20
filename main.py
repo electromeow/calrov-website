@@ -1,8 +1,7 @@
-from flask import Flask, Response, request, render_template_string
+import asyncio
+from flask import Flask, Response, request, render_template
 import aiofiles
-from pymongo import MongoClient
-import json
-from threading import Thread
+from motor.motor_asyncio import AsyncIOMotorClient
 from urllib.parse import quote
 import os
 from utils import *
@@ -10,7 +9,7 @@ from waitress import serve
 
 os.system("python3 build.py")
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="./html")
 
 db_cred = {
     "user": os.environ["MONGO_USER"],
@@ -19,46 +18,32 @@ db_cred = {
     "database": os.environ["MONGO_DBNAME"]
 }
 
-mongo = MongoClient(f"mongodb+srv://{quote(db_cred['user'])}:{quote(db_cred['password'])}@{db_cred['host']}/{db_cred['database']}?retryWrites=true&w=majority")
-db = mongo["calrovwebsite"]
+mongo = AsyncIOMotorClient(f"mongodb+srv://{quote(db_cred['user'])}:{quote(db_cred['password'])}@{db_cred['host']}/{db_cred['database']}?retryWrites=true&w=majority")
+mongo.get_io_loop = asyncio.get_running_loop
+db = mongo.get_default_database()
 
 @app.before_request
 def before_request():
     if (not request.headers.get("user-agent").startswith("Mozilla/5.0")) or request.headers.get("user-agent").find("Trident") > -1:
-        return "Görünüşe bakılırsa taş devrinden kalma bir tarayıcı veya Internet Explorer kullanıyorsunuz. \
-Girdiğiniz sitelerin düzgün çalışması için lütfen modern bir tarayıcıya geçiş yapınız. \
-Modern tarayıcıdan kastımız, Chromium tabanlı(Chromium, Chrome, Edge, Opera...) veya Firefox \
-tabanlı(Firefox, LibreWolf, Tor...) bir tarayıcının veya Safari'nin son sürümlerinden birine geçiş yapmanızdır. \
-Okuduğunuz için teşekkür ederiz..."
-
-
+        return DEPRECATED_BROWSER_WARNING
 
 @app.route("/")
 async def index():
-    Thread(target=send_telemetry, args=(db, request.headers.get("user-agent"), request.remote_addr, "/")).start()
-    async with aiofiles.open("./static/index.html", "r") as f:
-        return await f.read()
+    return render_template("index.html")
 
 @app.route("/sponsorluk")
 async def sponsorluk():
-    Thread(target=send_telemetry, args=(db, request.headers.get("user-agent"), request.remote_addr, "/sponsorluk")).start()
-    async with aiofiles.open("./static/sponsorluk.html", "r") as f:
-        return await f.read()
+    return render_template("sponsorluk.html")
 
 @app.route("/hakkimizda")
 async def hakkimizda():
-    Thread(target=send_telemetry,
-           args=(db, request.headers.get("user-agent"), request.remote_addr, "/hakkimizda")).start()
-    async with aiofiles.open("./static/hakkimizda.html", "r") as f:
-        async with aiofiles.open("./uyeler.json", 'r') as uyelerjson:
-            uyeler = json.loads(await uyelerjson.read())
-        return render_template_string(await f.read(), uyeler=uyeler)
+    uyeler = await db["users"].find().to_list(9999999999999999999)
+    uyeler = sorted(uyeler, key=lambda x: x["_id"])
+    return render_template("hakkimizda.html", uyeler=uyeler)
 
 @app.route("/iletisim")
 async def iletisim():
-    Thread(target=send_telemetry, args=(db, request.headers.get("user-agent"), request.remote_addr, "/iletisim")).start()
-    async with aiofiles.open("./static/iletisim.html", "r") as f:
-        return await f.read()
+    return render_template("iletisim.html")
 
 
 @app.route("/css/<path:filename>")
@@ -83,12 +68,8 @@ async def image(filename):
 
 @app.route("/haberler/<path:haber_id>")
 async def haber(haber_id):
-    Thread(target=send_telemetry,
-           args=(db, request.headers.get("user-agent"), request.remote_addr, request.path)).start()
-    haber = db["haberler"].find_one({"_id": int(haber_id)})
-    async with aiofiles.open("./static/haber.html") as f:
-        skeleton = await f.read()
-        return render_template_string(skeleton, json_obj=haber)
+    haber = await db["haberler"].find_one({"_id": int(haber_id)})
+    return render_template("haber.html", json_obj=haber)
 
 @app.route("/scripts/<path:filename>")
 async def javascript(filename):
@@ -117,27 +98,68 @@ async def favicon():
 
 @app.route("/haberler")
 async def haberler():
-    Thread(target=send_telemetry,
-           args=(db, request.headers.get("user-agent"), request.remote_addr, "/haberler")).start()
-    async with aiofiles.open("./static/haberler.html", 'r') as f:
-        pageno = None
-        try:
-            pageno = request.args.get("p")
-        except ValueError:
-            pass
-        pageno = int(1 if pageno is None else pageno)
-        haber_count = db["haberler"].estimated_document_count()
-        haber_ids = list(filter(lambda i: i > 0, [
-            i for i in range(haber_count - ((pageno-1)*5), haber_count-(pageno*5), -1)
-        ]))
-        haberler = list(db["haberler"].find({"_id": {
-            "$in": haber_ids
-        }}))
-        firstpage = True if pageno == 1 else False
-        lastpage = 1 in haber_ids
-        haberler = sorted(haberler, key=lambda i: i["_id"], reverse=True)
-        return render_template_string(await f.read(), haberler=haberler, firstpage=firstpage, lastpage=lastpage, pageno=pageno)
+    pageno = None
+    try:
+        pageno = request.args.get("p")
+    except ValueError:
+        pass
+    pageno = int(1 if pageno is None else pageno)
+    haber_count = await db["haberler"].count_documents({})
+    haber_ids = list(filter(lambda i: i > 0, [
+        i for i in range(haber_count - ((pageno-1)*5), haber_count-(pageno*5), -1)
+    ]))
+    haberler = await db["haberler"].find({"_id": {
+        "$in": haber_ids
+    }}).to_list(9999999999999999999)
+    firstpage = True if pageno == 1 else False
+    lastpage = 1 in haber_ids
+    haberler = sorted(haberler, key=lambda i: i["_id"], reverse=True)
+    return render_template("haberler.html", haberler=haberler, firstpage=firstpage, lastpage=lastpage, pageno=pageno)
+
+
+@app.route("/blog")
+async def blog():
+    pageno = None
+    try:
+        pageno = request.args.get("p")
+    except ValueError:
+        pass
+    pageno = int(1 if pageno is None else pageno)
+    post_count = await db["blog"].count_documents({})
+    post_ids = list(filter(lambda i: i > 0, [
+        i for i in range(post_count - ((pageno-1)*5), post_count-(pageno*5), -1)
+    ]))
+    posts = await db["blog"].find({"_id": {
+        "$in": post_ids
+    }}).to_list(9999999999999999999)
+    firstpage = True if pageno == 1 else False
+    lastpage = 1 in post_ids
+    haberler = sorted(posts, key=lambda i: i["timestamp"], reverse=True)
+    return render_template("blog.html", posts=posts, firstpage=firstpage, lastpage=lastpage, pageno=pageno)
+
+
+@app.route("/blog/<path:post_id>")
+async def blog_post(post_id):
+    post = await db["blog"].find_one({"_id": int(post_id)})
+    author = await db["users"].find_one({"_id": int(post["author_id"])})
+    publishtime = timestamp_to_human_time(post["timestamp"])
+    return render_template("blogpost.html", json_obj=post, author=author, publishtime=publishtime)
+
+@app.route("/uyeler/<path:uye_id>")
+async def uye(uye_id):
+    uye = await db["users"].find_one({"_id": int(uye_id)})
+    return render_template("uye.html", uye=uye)
 
 
 if __name__ == "__main__":
-    serve(app, listen="*:"+str(os.environ["PORT"]))
+    # I created this try/except and if/else statements to make it work in prod. mode on Heroku and in dev. mode on my computer
+    try:
+        if os.environ["env_type"] == "prod":
+            serve(app, listen="*:"+str(os.environ["PORT"]))
+        else:
+            app.run(port=8080)
+    except:
+        app.run(port=8080)
+
+
+

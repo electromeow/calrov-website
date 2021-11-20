@@ -1,8 +1,8 @@
 Flask[async]
 aiofiles
-pymongo
-dnspython
 waitress
+motor
+dnspython
 
 # Build deps to compile sass and minify files
 libsass

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% include './essential.html' %}
     <title>Hakkımızda - CALROV</title>
     <meta
       name="keywords"
@@ -51,30 +49,11 @@
       property="twitter:card"
       content="https://www.calrovteam.com/images/talay-sualtinda-fotograf.jpg"
     />
-    <link rel="stylesheet" href="/css/navbar.css" />
-    <link rel="stylesheet" href="/css/footer.css" />
-    <link rel="stylesheet" href="/css/body.css" />
     <link rel="stylesheet" href="/css/hakkimizda.css" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/fontawesome/fontawesome.min.css" />
-    <script src="/scripts/toggleMenu.js"></script>
   </head>
   <body>
     <div class="container">
-      <nav>
-        <a href="/">
-          <img src="/images/calrovlogo.png" alt="logo" />
-          <h1>CALROV</h1>
-        </a>
-        <i class="fas fa-bars" name="hamburger" onclick="toggleMenu()"></i>
-        <ul>
-          <li><a href="/sponsorluk">Sponsorluk</a></li>
-          <li><a href="/haberler">Haberler</a></li>
-          <li><a href="/hakkimizda">Hakkımızda</a></li>
-          <li><a href="/iletisim">İletişim</a></li>
-        </ul>
-      </nav>
-      <div id="spacer"></div>
+      {% include './navbar.html' %}
       <section>
         <h1>Hakkımızda</h1>
         <article>
@@ -96,60 +75,21 @@
         <br />
         <div id="uyeler">
           {% for uye in uyeler %}
+          <a href="/uyeler/{{uye['_id']}}">
           <div class="uye">
             <img
-              src="https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png"
+              src="{{ uye['thumbnail'] }}"
             />
             <div>
               <h1>{{ uye["role"] }}</h1>
-              <h2>{{ uye["name"] }}</h2>
-              {{ uye["desc"] }}
+              <h2>{{ uye["name"] }} {{ uye["surname"].upper() }}</h2>
             </div>
           </div>
+          </a>
           {% endfor %}
         </div>
-        <script>
-          fetch("/data/uyeler.json").then((res) =>
-            res.json().then((jsonres) =>
-              jsonres.forEach((x) => {
-                document.querySelector("div#uyeler").innerHTML += `
-            <div class="uye">
-              <img
-              src="https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png"/>
-              <div>
-                <h1>${x.role}</h1>
-                <h2>${x.name}</h2>
-                ${x.desc}
-              </div>
-            </div>
-            `;
-              })
-            )
-          );
-        </script>
       </section>
-      <br />
-      <br />
-      <footer>
-        CALROV (C) 2021
-        <div>
-          <a href="https://instagram.com/calrovteam">
-            <i class="fab fa-instagram fa-2x"></i>
-            <span></span>
-            @calrovteam</a
-          ><br />
-        </div>
-        <div>
-          <a href="mailto:calrovteam@gmail.com">
-            <i class="far fa-envelope fa-2x"></i>
-            <span></span>
-            calrovteam@gmail.com</a
-          ><br />
-        </div>
-      </footer>
-      <br />
-      <br />
+      {% include './footer.html' %}
     </div>
   </body>
-  <script src="/scripts/old-browser-blocker.js"></script>
 </html>

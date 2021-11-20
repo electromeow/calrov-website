@@ -6,21 +6,10 @@ MONTHS = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağ
 def timestamp_to_human_time(timestamp_integer):
     timestamp = datetime.fromtimestamp(timestamp_integer)
     timestamp = timestamp + timedelta(hours=3)
-    return f"{timestamp.date} {MONTHS[timestamp.month]} {timestamp.year} {timestamp.hour}:{timestamp.minute}"
+    return f"{timestamp.day} {MONTHS[timestamp.month]} {timestamp.year} {timestamp.hour-3}:{timestamp.minute if len(str(timestamp.minute)) > 1 else '0'+str(timestamp.minute)}"
 
-def send_telemetry(db, useragent, ip, path):
-    db["telemetry"].insert_one({"ip": ip, "useragent": useragent, "path": path})
-    pass
-
-def create_haber_card(json_obj):
-    return f"""
-<div class="haber">
-<a href="/haberler/{json_obj["_id"]}">
-<img src="{json_obj["thumbnail"]}" alt="haber küçük resim">
-<div>
-<h1>{json_obj["title"]}</h1>
-<p>{json_obj["summary"]}</p>
-</div>
-</a>
-</div>
-"""
+DEPRECATED_BROWSER_WARNING = "Görünüşe bakılırsa taş devrinden kalma bir tarayıcı veya Internet Explorer kullanıyorsunuz. \
+Girdiğiniz sitelerin düzgün çalışması için lütfen modern bir tarayıcıya geçiş yapınız. \
+Modern tarayıcıdan kastımız, Chromium tabanlı(Chromium, Chrome, Edge, Opera...) veya Firefox \
+tabanlı(Firefox, LibreWolf, Tor...) bir tarayıcının veya Safari'nin son sürümlerinden birine geçiş yapmanızdır. \
+Okuduğunuz için teşekkür ederiz..."
