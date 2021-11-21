@@ -18,28 +18,36 @@ db_cred = {
     "database": os.environ["MONGO_DBNAME"]
 }
 
-mongo = AsyncIOMotorClient(f"mongodb+srv://{quote(db_cred['user'])}:{quote(db_cred['password'])}@{db_cred['host']}/{db_cred['database']}?retryWrites=true&w=majority")
+mongo = AsyncIOMotorClient(
+    f"mongodb+srv://{quote(db_cred['user'])}:{quote(db_cred['password'])}@{db_cred['host']}/{db_cred['database']}?retryWrites=true&w=majority")
 mongo.get_io_loop = asyncio.get_running_loop
 db = mongo.get_default_database()
+
 
 @app.before_request
 def before_request():
     if (not request.headers.get("user-agent").startswith("Mozilla/5.0")) or request.headers.get("user-agent").find("Trident") > -1:
         return DEPRECATED_BROWSER_WARNING
 
+
 @app.route("/")
 async def index():
     return render_template("index.html")
+
 
 @app.route("/sponsorluk")
 async def sponsorluk():
     return render_template("sponsorluk.html")
 
+
 @app.route("/hakkimizda")
 async def hakkimizda():
-    uyeler = await db["users"].find().to_list(9999999999999999999)
-    uyeler = sorted(uyeler, key=lambda x: x["_id"])
-    return render_template("hakkimizda.html", uyeler=uyeler)
+    uyeler_a = await db["users"].find({"team": "a"}).to_list(9999999999999999999)
+    uyeler_a = sorted(uyeler_a, key=lambda x: x["_id"])
+    uyeler_b = await db["users"].find({"team": "b"}).to_list(9999999999999999999)
+    uyeler_b = sorted(uyeler_b, key=lambda x: x["_id"])
+    return render_template("hakkimizda.html", uyeler_a=uyeler_a, uyeler_b=uyeler_b)
+
 
 @app.route("/iletisim")
 async def iletisim():
@@ -50,6 +58,7 @@ async def iletisim():
 async def css(filename):
     async with aiofiles.open(f"./css/{filename}", "r") as f:
         return Response(await f.read(), mimetype="text/css")
+
 
 @app.route("/images/<path:filename>")
 async def image(filename):
@@ -66,10 +75,12 @@ async def image(filename):
             mime = "image/svg+xml"
         return Response(await f.read(), mimetype=mime)
 
+
 @app.route("/haberler/<path:haber_id>")
 async def haber(haber_id):
     haber = await db["haberler"].find_one({"_id": int(haber_id)})
     return render_template("haber.html", json_obj=haber)
+
 
 @app.route("/scripts/<path:filename>")
 async def javascript(filename):
@@ -91,10 +102,12 @@ async def fontawesome(filename):
             mime = "font/ttf"
         return Response(await f.read(), mimetype=mime)
 
+
 @app.route("/favicon.ico")
 async def favicon():
     async with aiofiles.open("favicon.ico", "rb") as f:
         return Response(await f.read(), mimetype="image/png")
+
 
 @app.route("/haberler")
 async def haberler():
@@ -145,6 +158,7 @@ async def blog_post(post_id):
     publishtime = timestamp_to_human_time(post["timestamp"])
     return render_template("blogpost.html", json_obj=post, author=author, publishtime=publishtime)
 
+
 @app.route("/uyeler/<path:uye_id>")
 async def uye(uye_id):
     uye = await db["users"].find_one({"_id": int(uye_id)})
@@ -160,6 +174,3 @@ if __name__ == "__main__":
             app.run(port=8080)
     except:
         app.run(port=8080)
-
-
-
