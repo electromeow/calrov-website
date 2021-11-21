@@ -4,9 +4,9 @@ MONTHS = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağ
 
 
 def timestamp_to_human_time(timestamp_integer):
-    timestamp = datetime.fromtimestamp(timestamp_integer)
+    timestamp = datetime.utcfromtimestamp(timestamp_integer)
     timestamp = timestamp + timedelta(hours=3)
-    return f"{timestamp.day} {MONTHS[timestamp.month]} {timestamp.year} {timestamp.hour-3}:{timestamp.minute if len(str(timestamp.minute)) > 1 else '0'+str(timestamp.minute)}"
+    return f"{timestamp.day} {MONTHS[timestamp.month]} {timestamp.year} {timestamp.hour+3}:{timestamp.minute if len(str(timestamp.minute)) > 1 else '0'+str(timestamp.minute)}"
 
 DEPRECATED_BROWSER_WARNING = "Görünüşe bakılırsa taş devrinden kalma bir tarayıcı veya Internet Explorer kullanıyorsunuz. \
 Girdiğiniz sitelerin düzgün çalışması için lütfen modern bir tarayıcıya geçiş yapınız. \
