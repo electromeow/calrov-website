@@ -3,6 +3,7 @@ aiofiles
 waitress
 motor
 dnspython
+bcrypt
 
 # Build deps to compile sass and minify files
 libsass
