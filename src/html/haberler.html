@@ -72,14 +72,14 @@
         <div id="paginator">
           <a
             id="leftarrow"
-            href="{{ ('/haberler?p='+str(pageno-1)) if not firstpage else '#'}}"
+            href="{{ '/haberler?p=' if not firstpage else '#'}}{{ pageno-1 if not firstpage else ''}}"
             class="{{'disabled' if firstpage else ''}}"
             ><i class="fas fa-chevron-left fa-2x"></i
           ></a>
           <span id="pagenumber">{{ pageno }}</span>
           <a
             id="rightarrow"
-            href="{{ ('/haberler?p='+str(pageno+1)) if not lastpage else '#'}}"
+            href="{{ '/haberler?p=' if not lastpage else '#'}}{{ pageno+1 if not lastpage else ''}}"
             class="{{'disabled' if lastpage else ''}}"
             ><i class="fas fa-chevron-right fa-2x"></i
           ></a>
