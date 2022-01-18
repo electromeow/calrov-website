@@ -7,7 +7,7 @@ MONTHS = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağ
 def timestamp_to_human_time(timestamp_integer):
     timestamp = datetime.utcfromtimestamp(timestamp_integer)
     timestamp = timestamp + timedelta(hours=3)
-    return f"{timestamp.day} {MONTHS[timestamp.month]} {timestamp.year} {timestamp.hour+3}:{timestamp.minute if len(str(timestamp.minute)) > 1 else '0'+str(timestamp.minute)}"
+    return f"{timestamp.day} {MONTHS[timestamp.month-1]} {timestamp.year} {timestamp.hour+3}:{timestamp.minute if len(str(timestamp.minute)) > 1 else '0'+str(timestamp.minute)}"
 
 async def check_user(auth_header, db):
     (userid, password) = tuple(map(lambda i: codecs.decode(i.encode("utf-8"), "base64").decode("utf-8"),
