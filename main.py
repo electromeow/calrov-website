@@ -1,7 +1,5 @@
 import asyncio
-import codecs
 import json
-import bcrypt
 from flask import Flask, Response, request, render_template
 import aiofiles
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -46,11 +44,9 @@ async def sponsorluk():
 
 @app.route("/hakkimizda")
 async def hakkimizda():
-    uyeler_a = await db["users"].find({"team": "a"}).to_list(9999999999999999999)
-    uyeler_a = sorted(uyeler_a, key=lambda x: x["_id"])
-    uyeler_b = await db["users"].find({"team": "b"}).to_list(9999999999999999999)
-    uyeler_b = sorted(uyeler_b, key=lambda x: x["_id"])
-    return render_template("hakkimizda.html", uyeler_a=uyeler_a, uyeler_b=uyeler_b)
+    uyeler = await db["users"].find({}).to_list(9999999999999999999)
+    uyeler = sorted(uyeler, key=lambda x: x["_id"])
+    return render_template("hakkimizda.html", uyeler=uyeler)
 
 
 @app.route("/iletisim")
@@ -247,6 +243,7 @@ async def api_blog_post():
             return Response(status=200)
     else:
         return Response(status=401)
+
 
 
 if __name__ == "__main__":

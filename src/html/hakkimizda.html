@@ -67,33 +67,13 @@
           katılmayı planlamaktadır.<br />
           Bu sene ise okulumuzdaki robotik alanına ilgi duyan yeni
           öğrencilere de fırsat vermek için takımımıza yeni başvurular
-          alınmıştır. Yarışmadaki takımlarda en fazla 10 öğrenci olabildiğinden
-          dolayı ve takım başvurusuna yoğun ilgi olduğundan dolayı takımımız
-          2 farklı takıma bölünmüştür.<br />
-          Takımlarımız faaliyetlerini yazılım, tasarım, mekanik ve
+          alınmıştır.<br />
+          Takımımız faaliyetlerini yazılım, tasarım, mekanik ve
           elektronik ekibi olmak üzere dört ekibe ayrılarak yürütmektedir.
         </article>
         <h1>Takım Üyeleri</h1>
-        <h2>Takım A:</h2>
         <div id="uyeler">
-          {% for uye in uyeler_a %}
-          <a href="/uyeler/{{ uye['_id'] }}">
-          <div class="uye">
-            <img
-              src="{{ uye['thumbnail'] }}"
-              alt="üye profil resmi"
-            />
-            <div>
-              <h1>{{ uye["role"] }}</h1>
-              <h2>{{ uye["name"] }} {{ uye["surname"].upper() }}</h2>
-            </div>
-          </div>
-          </a>
-          {% endfor %}
-        </div>
-        <h2>Takım B:</h2>
-        <div id="uyeler">
-          {% for uye in uyeler_b %}
+          {% for uye in uyeler %}
           <a href="/uyeler/{{ uye['_id'] }}">
           <div class="uye">
             <img
