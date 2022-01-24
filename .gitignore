@@ -1,9 +1,9 @@
-**/__pycache__/
+__pycache__/
 venv/
 .idea/
 .atom/
-**/.DS_Store
-database_credentials.json
-css/
+.DS_Store
+/database_credentials.json
+/css
 /html
 /scripts
