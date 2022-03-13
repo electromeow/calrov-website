@@ -279,10 +279,20 @@ async def admin_haberler():
 async def admin_haber_editor(haber_id):
     if await check_user(request.headers.get("authorization"), db):
         haber = await db["haberler"].find_one({"_id": int(haber_id)})
-        print(haber)
         return render_template("admin/habereditor.html", haber=haber)
 
+@app.route("/admin/blog")
+async def admin_blog():
+    if await check_user(request.headers.get("authorization"), db):
+        blog_posts = await db["blog"].find({}).to_list(9999999999999999999)
+        blog_posts = sorted(blog_posts, key=lambda i: i["timestamp"], reverse=True)
+        return render_template("admin/blog.html", posts=blog_posts)
 
+@app.route("/admin/blogDuzenle/<path:post_id>")
+async def admin_blog_editor(post_id):
+    if await check_user(request.headers.get("authorization"), db):
+        blog_post = await db["blog"].find_one({"_id":int(post_id)})
+        return render_template("admin/blogposteditor.html", post=blog_post)
 
 if __name__ == "__main__":
     # I created this try/except and if/else statements to make it work in prod. mode on Heroku and in dev. mode on my computer

@@ -10,6 +10,12 @@
 <input type="url" id="haber-thumbnail" class="habereditorinput" placeholder="Kapak Resmi(URL)" value="{{haber['thumbnail']}}" />
 <br />
 <button class="habereditorinput" onclick="editHaber({{haber['_id']}});">Düzenle</button>
+<button class="habereditorinput" onclick="document.querySelector('article#haberpreview').innerHTML = document.querySelector('textarea#haber-content').value;">Önizleme</button>
+
+<br />
+<br />
+<h1>Önizleme:</h1>
+<article id="haberpreview"></article>
 <style>
   i.fa-arrow-left {
     cursor: pointer;
@@ -34,5 +40,8 @@
   textarea#haber-content {
     width: 90%;
     height: 30em;
+  }
+  button {
+    cursor: pointer;
   }
 </style>
