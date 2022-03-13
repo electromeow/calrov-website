@@ -1,6 +1,6 @@
 import asyncio
 import json
-from flask import Flask, Response, request, render_template
+from flask import Flask, Response, request, render_template, redirect
 import aiofiles
 from motor.motor_asyncio import AsyncIOMotorClient
 from urllib.parse import quote
@@ -243,6 +243,44 @@ async def api_blog_post():
             return Response(status=200)
     else:
         return Response(status=401)
+
+@app.route("/api/login", methods=["GET"])
+async def api_login():
+    if await check_user(request.headers.get("authorization"), db):
+        return Response(status=200)
+    else:
+        return Response(status=403)
+
+@app.route("/admin")
+async def admin_index():
+    return render_template("admin/index.html")
+
+@app.route("/admin/login")
+async def admin_login():
+    return render_template("admin/login.html")
+
+@app.route("/admin/menu")
+async def admin_menu():
+    if await check_user(request.headers.get("authorization"), db):
+        return render_template("admin/menu.html")
+    else:
+        return Response(status=401)
+
+@app.route("/admin/haberler")
+async def admin_haberler():
+    if await check_user(request.headers.get("authorization"), db):
+        haberler = await db["haberler"].find({}).to_list(9999999999999999999)
+        haberler = sorted(haberler, key=lambda i: i["_id"], reverse=True)
+        return render_template("admin/haberler.html", haberler=haberler)
+    else:
+        return Response(status=401)
+
+@app.route("/admin/haberDuzenle/<path:haber_id>")
+async def admin_haber_editor(haber_id):
+    if await check_user(request.headers.get("authorization"), db):
+        haber = await db["haberler"].find_one({"_id": int(haber_id)})
+        print(haber)
+        return render_template("admin/habereditor.html", haber=haber)
 
 
 

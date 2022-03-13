@@ -1,0 +1,35 @@
+<i class="fas fa-arrow-left" onclick="loadMenu();"></i>
+<button onclick="createHaber();">Yeni Haber</button>
+<br />
+<br />
+{% for haber in haberler %}
+<div class="haber">
+  <h2>{{ haber['title'] }}</h2>
+  <h5 onclick="loadHaberEditor({{haber['_id']}});">Düzenle</h5>
+  <h5 onclick="deleteHaber({{haber['_id']}});">Sil</h5>
+</div>
+<br />
+{% endfor %}
+<style>
+  i.fa-arrow-left {
+    cursor: pointer;
+    margin-right: 1em;
+    font-size: 1.3em;
+  }
+  div.haber h2 {
+    margin: 0;
+  }
+  div.haber h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0.5em;
+    cursor: pointer;
+    display: inline;
+  }
+  button {
+    border: 0.1em solid black;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    background-color: white;
+  }
+</style>

@@ -1,79 +1,48 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
   <head>
-    {% include './essential.html' %}
+    {% include './essential.html' %} 
     <title>{{ uye["name"] }} {{ uye["surname"].upper() }} - CALROV</title>
-    <meta
-      name="keywords"
-      content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç"
-    />
-    <meta
-      name="description"
-      content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır."
-    />
-    <meta name="og:title" property="og:title" content="Ana Sayfa - CALROV" />
-    <meta
-      name="og:description"
-      property="og:description"
-      content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır."
-    />
-    <meta
-      property="og:image"
-      name="og:image"
-      content="https://www.calrovteam.com/images/calrovlogo.png"
-    />
-    <meta
-      property="og:url"
-      name="og:url"
-      content="https://www.calrovteam.com"
-    />
-    <meta property="og:locale" name="og:locale" content="tr_TR" />
-    <meta property="og:site_name" name="og:site_name" content="CALROV" />
-    <meta
-      name="twitter:title"
-      property="twitter:title"
-      content="Ana Sayfa - CALROV"
-    />
-    <meta
-      name="twitter:description"
-      property="twitter:description"
-      content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır."
-    />
-    <meta
-      name="twitter:image"
-      property="twitter:image"
-      content="https://www.calrovteam.com/images/calrovlogo.png"
-    />
-    <meta
-      name="twitter:card"
-      property="twitter:card"
-      content="https://www.calrovteam.com/images/talay-sualtinda-fotograf.jpg"
-    />
+    <meta name=keywords content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç">
+    <meta name=description content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır.">
+    <meta name=og:title property=og:title content="Ana Sayfa - CALROV">
+    <meta name=og:description property=og:description content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır.">
+    <meta property=og:image name=og:image content=https://www.calrovteam.com/images/calrovlogo.png>
+    <meta property=og:url name=og:url content=https://www.calrovteam.com>
+    <meta property=og:locale name=og:locale content=tr_TR>
+    <meta property=og:site_name name=og:site_name content=CALROV>
+    <meta name=twitter:title property=twitter:title content="Ana Sayfa - CALROV">
+    <meta name=twitter:description property=twitter:description content="CALROV, Cağaloğlu Anadolu Lisesi Yapay Zeka ve Programlama Kulübü bünyesinde Teknofest İnsansız Su Altı Sistemleri kategorisinde yarışmak üzere kurulmuş bir takımdır.">
+    <meta name=twitter:image property=twitter:image content=https://www.calrovteam.com/images/calrovlogo.png>
+    <meta name=twitter:card property=twitter:card content=https://www.calrovteam.com/images/talay-sualtinda-fotograf.jpg>
   </head>
   <body>
-    <div class="container">
-      {% include './navbar.html' %}
+    <div class=container>
+      {% include './navbar.html' %} 
       <section>
-        <img src="{{ uye['thumbnail'] }}" alt="üye fotoğrafı "/>
+        <img src="{{ uye['thumbnail'] }}" alt="üye fotoğrafı ">
         <h1>{{ uye["name"] }} {{ uye["surname"] }}</h1>
         <h2>{{ uye["role"] }}</h2>
         <article>{{ uye["desc"] }}</article>
-        <style type="text/css">
+        <style type=text/css>
           section h1 {
-            font-size: 2em;
+          font-size: 2em;
           }
           section h2 {
-            font-size: 1.5em;
+          font-size: 1.5em;
           }
           section article {
-            font-size: 1.2em;
+          font-size: 1.2em;
           }
           section img {
-            width: 10em;
+          width: 10em;
           }
         </style>
       </section>
-      {% include './footer.html' %}
+      {% include './footer.html' %} 
     </div>
   </body>
 </html>
+

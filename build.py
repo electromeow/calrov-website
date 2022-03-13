@@ -1,4 +1,5 @@
 import os
+import glob
 from sass import compile as sass
 from htmlmin import minify as htmlmin
 from jsmin import jsmin
@@ -21,10 +22,12 @@ except FileExistsError:
 sass(dirname=("sass", "css"), output_style="compressed")
 
 # Minimize HTML files in src/html/ folder into html/ folder.
-for htmlfile in os.listdir("src/html"):
-    with open("src/html/"+htmlfile, 'r') as f:
+for htmlfile in glob.iglob("src/html/**/*", recursive=True):
+    if os.path.isdir(htmlfile):
+        continue
+    with open(htmlfile, 'r') as f:
         content = f.read()
-    with open("html/"+htmlfile, 'w') as f:
+    with open(htmlfile[4:], 'w') as f:
         f.write(htmlmin(content, remove_empty_space=True, remove_comments=True))
 
 # Minimize JS files in src/scripts/ into scripts/

@@ -1,0 +1,38 @@
+<i class="fas fa-arrow-left" onclick="loadHaberler();"></i>
+<br />
+<br />
+<input type="text" class="habereditorinput" id="haber-title" placeholder="Başlık" value="{{haber['title']}}" />
+<br />
+<input type="text" class="habereditorinput" id="haber-summary" placeholder="Haber Özeti" value="{{haber['summary']}}" />
+<br />
+<textarea id="haber-content" class="habereditorinput" placeholder="İçerik(HTML)">{{haber["content"]}}</textarea>
+<br />
+<input type="url" id="haber-thumbnail" class="habereditorinput" placeholder="Kapak Resmi(URL)" value="{{haber['thumbnail']}}" />
+<br />
+<button class="habereditorinput" onclick="editHaber({{haber['_id']}});">Düzenle</button>
+<style>
+  i.fa-arrow-left {
+    cursor: pointer;
+    font-size: 1.3em;
+  }
+  input#haber-title {
+    width: 90%;
+  }
+  .habereditorinput {
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 0.1em solid black;
+    margin: 0.5em;
+    background-color: white;
+  }
+  input#haber-summary {
+    width: 90%;
+  }
+  input#haber-thumbnail {
+    width: 90%;
+  }
+  textarea#haber-content {
+    width: 90%;
+    height: 30em;
+  }
+</style>

@@ -1,0 +1,33 @@
+<form onsubmit="return loginsubmit();">
+  <div id="loginerror">Yanlış Giriş Bilgileri!</div>
+  <br />
+  <input type="text" id="idinput" placeholder="ID" required="required" />
+  <br />
+  <input type="password" id="passwordinput" placeholder="Şifre" required="required" /><br />
+  <button type="submit">Giriş</button>
+</form>
+<style>
+  div#loginerror {
+    color: red;
+    background-color: lightpink;
+    padding: 0.5em;
+    border: 0.1em solid red;
+    border-radius: 0.5em;
+    margin: 0.5em;
+    display: none;
+  }
+  input {
+    padding: 0.5em;
+    border: 0.1em solid black;
+    border-radius: 0.5em;
+    margin: 0.5em;
+  }
+  button {
+    padding: 0.5em;
+    border: 0.1em solid black;
+    border-radius: 0.5em;
+    background-color: white;
+    margin: 0.5em;
+    cursor: pointer;
+  }
+</style>

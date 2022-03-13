@@ -1,65 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
   <head>
     {% include './essential.html' %}
     <title>{{ json_obj["title"] }}</title>
-    <meta
-      name="keywords"
-      content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç, haber"
-    />
-    <meta name="description" />
-    <meta
-      name="og:title"
-      property="og:title"
-      content="{{ json_obj['title'] }}"
-    />
-    <meta
-      name="og:description"
-      property="og:description"
-      content="{{ json_obj['summary'] }}"
-    />
-    <meta
-      property="og:image"
-      name="og:image"
-      content="https://www.calrovteam.com{{ json_obj['thumbnail'].lstrip('.') }}"
-    />
-    <meta
-      property="og:url"
-      name="og:url"
-      content="https://www.calrovteam.com/haberler/{{ json_obj['_id'] }}"
-    />
-    <meta property="og:locale" name="og:locale" content="tr_TR" />
-    <meta property="og:site_name" name="og:site_name" content="CALROV" />
-    <meta
-      name="twitter:title"
-      property="twitter:title"
-      content="{{ json_obj['title'] }}"
-    />
-    <meta
-      name="twitter:description"
-      property="twitter:description"
-      content="{{ json_obj['summary'] }}"
-    />
-    <meta
-      name="twitter:image"
-      property="twitter:image"
-      content="https://www.calrovteam.com/images/calrovlogo.png"
-    />
-    <meta
-      name="twitter:card"
-      property="twitter:card"
-      content="https://www.calrovteam.com{{json_obj['thumbnail']}}"
-    />
+    <meta name=keywords content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç, haber">
+    <meta name=description>
+    <meta name=og:title property=og:title content="{{ json_obj['title'] }}">
+    <meta name=og:description property=og:description content="{{ json_obj['summary'] }}">
+    <meta property=og:image name=og:image content="https://www.calrovteam.com{{ json_obj['thumbnail'].lstrip('.') }}">
+    <meta property=og:url name=og:url content="https://www.calrovteam.com/haberler/{{ json_obj['_id'] }}">
+    <meta property=og:locale name=og:locale content=tr_TR>
+    <meta property=og:site_name name=og:site_name content=CALROV>
+    <meta name=twitter:title property=twitter:title content="{{ json_obj['title'] }}">
+    <meta name=twitter:description property=twitter:description content="{{ json_obj['summary'] }}">
+    <meta name=twitter:image property=twitter:image content=https://www.calrovteam.com/images/calrovlogo.png>
+    <meta name=twitter:card property=twitter:card content="https://www.calrovteam.com{{json_obj['thumbnail']}}">
   </head>
   <body>
-    <div class="container">
+    <div class=container>
       {% include './navbar.html' %}
       <section>
-        <h1 class="habertitle">{{json_obj['title']}}</h1>
+        <h1 class=habertitle>{{json_obj['title']}}</h1>
         <article>{{json_obj['content']|safe}}</article>
       </section>
       {% include './footer.html' %}
     </div>
   </body>
-  <script src="/scripts/old-browser-blocker.js"></script>
+  <script src=/scripts/old-browser-blocker.js></script>
 </html>
