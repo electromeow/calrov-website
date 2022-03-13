@@ -24,6 +24,7 @@ sass(dirname=("sass", "css"), output_style="compressed")
 # Minimize HTML files in src/html/ folder into html/ folder.
 for htmlfile in glob.iglob("src/html/**/*", recursive=True):
     if os.path.isdir(htmlfile):
+        os.mkdir(htmlfile[4:])
         continue
     with open(htmlfile, 'r') as f:
         content = f.read()
