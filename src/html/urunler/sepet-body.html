@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    {% include './essential.html' %}
+    <title>Sepet - CALROV</title>
+    <meta name=keywords content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç, ürün, ürünler">
+    <meta name=description content="Bu sayfada sepetiniz bulunmaktadır.">
+    <meta name=og:title property=og:title content="Sepet - CALROV">
+    <meta name=og:description property=og:description content="Bu sayfada sepetiniz bulunmaktadır.">
+    <meta property=og:image name=og:image content=https://www.calrovteam.com/images/calrovlogo.png>
+    <meta property=og:url name=og:url content=https://calrovteam.com/sepet>
+    <meta property=og:locale name=og:locale content=tr_TR>
+    <meta property=og:site_name name=og:site_name content=CALROV>
+    <meta name=twitter:title property=twitter:title content="Sepet - CALROV">
+    <meta name=twitter:description property=twitter:description content="Bu sayfada sepetiniz bulunmaktadır.">
+    <meta name=twitter:image property=twitter:image content=https://www.calrovteam.com/images/calrovlogo.png>
+    <meta name=twitter:card property=twitter:card content=https://www.calrovteam.com/images/talay-sualtinda-fotograf.jpg>
+    <link rel="stylesheet" href="/css/sepet.css" />
+  </head>
+  <body>
+    <div class=container>
+      {% include './navbar.html' %}
+      <script type="text/javascript">
+        function siparisVer(event){
+          var data = Object.fromEntries(new FormData(event.target).entries());
+          data.cart = JSON.parse(localStorage.getItem("calrovCart"));
+          fetch("/api/siparisVer", {
+            method: "POST",
+            body: JSON.stringify(data)
+          }).then(res => {
+            if(res.status === 200){
+              alert("Siparişiniz Gönderildi. En kısa süre içinde sizinle iletişime geçilecektir. Lütfen e-posta kutunuzu bir sipariş onay mesajı için kontrol ediniz.");
+            }
+            else {
+              alert("Bir Hata Oluştu!");
+            }
+          })
+          event.preventDefault();
+          return false;
+        }
+      </script>
+      <section>
+        <script type="text/javascript">
+          function removeFromCart(id){
+            var cart = JSON.parse(localStorage.getItem("calrovCart"));
+            delete cart[id.toString()];
+            localStorage.setItem("calrovCart", JSON.stringify(cart));
+            window.location.reload();
+          }
+          var sepet = localStorage.getItem("calrovCart");
+          fetch("/api/createCart", {method: "POST", body: sepet})
+            .then(res => res.text())
+            .then(res => {
+              document.querySelector("div.container section").innerHTML = res;
+            });
+        </script>
+        <a href="/sepet"><div id="cart-icon">
+        <i class="fas fa-th"></i>
+        </div></a>
+      </section>
+      {% include './footer.html' %}
+    </div>
+  </body>
+</html>

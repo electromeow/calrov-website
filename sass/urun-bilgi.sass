@@ -1,0 +1,43 @@
+div.container section
+  div#photo-gallery
+    width: 100%
+    display: inline-block
+    max-width: 25em
+    margin-right: 2em
+    img#gallery-viewed-photo
+      width: 100%
+      position: relative
+      display: block
+      border-radius: 0.5em
+      margin-bottom: 1em
+    div#photo-gallery-tiny-thumbnails
+      width: 100%
+      img
+        width: 21%
+        margin-right: 1.5%
+        margin-left: 1.5%
+        margin-bottom: 0.75em
+        display: inline-block
+        cursor: pointer
+        border-radius: 0.3em
+  div#urun-ad-ve-sepet
+    display: inline-block
+    vertical-align: top
+    width: calc(100% - 27em)
+    @media screen and (max-width: 50em)
+      width: 100%
+    input#urun-adet
+      border-radius: 0.4em
+      border: 0.2em solid white
+      background-color: transparent
+      padding: 0.5em
+      color: white
+      margin-bottom: 1em
+    button#sepete-ekle-adet-degistir
+      border-radius: 0.4em
+      background-color: white
+      color: black
+      padding: 0.5em
+      margin-bottom: 1em
+  article
+    margin-top: 2em

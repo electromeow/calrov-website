@@ -1,0 +1,35 @@
+<div id="sepet-urunler">
+  {% for urun in urunler %}
+  <a href="/urunler/{{urun['_id']}}">
+    <div class="sepet-urun">
+      <img src="{{urun['images'][0]}}" alt="{{urun['name']}} resmi" />
+      <span>
+        <h1>{{urun['name']}}</h1><br />
+        <h2>{{urun['price']}}₺</h2><br />
+        <h2>{{urun['quantity']}} Adet</h2>
+      </span>
+      <i class="far fa-trash-alt" onclick="removeFromCart({{urun['_id']}});"></i>
+    </div>
+  </a>
+  {% endfor %}
+  <h2>Ürünlerin Toplam Fiyatı: {{ toplam_fiyat }}₺</h2>
+</div>
+<br />
+<h1>Siparişi Tamamla:</h1>
+<br />
+<form id="sepet-siparis" onsubmit="siparisVer(event)">
+  <input type="text" name="ad-soyad-calrov" placeholder="Ad-Soyad" required="required"/><br />
+  <input type="email" name="e-mail-calrov" placeholder="E-Posta" required="required"/><br />
+  <input type="tel" name="telefon-calrov" placeholder="Tel. No." required="required"/><br />
+  <input type="text" name="sehir-calrov" placeholder="Şehir" required="required"/><br /><br />
+  Sizinle Nasıl İletişime Geçmemizi Tercih Edersiniz?<br /><br />
+  <input type="radio" required="required" id="iletisim-tercih-telefon" name="iletisim-tercih" value="telefon"><label for="iletisim-tercih-telefon">Telefonla Arama Yoluyla</label><br />
+  <input type="radio" required="required" id="iletisim-tercih-wp" name="iletisim-tercih" value="wp"><label for="iletisim-tercih-wp">WhatsApp Yoluyla</label><br />
+  <input type="radio" required="required" id="iletisim-tercih-email" name="iletisim-tercih" value="email"><label for="iletisim-tercih-email">E-Posta Yoluyla</label><br /><br />
+  <button type="submit">Siparişi Gönder</button>
+</form>
+<a href="/urunler">
+  <div id="cart-icon">
+    <i class="fas fa-th"></i>
+  </div>
+</a>

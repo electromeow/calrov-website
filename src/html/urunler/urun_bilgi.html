@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    {% include './essential.html' %}
+    <title>{{urun["name"]}} - CALROV</title>
+    <meta name=keywords content="Teknofest, Cağaloğlu Anadolu Lisesi, CAL, ROV, AUV, CALROV, insansız, su altı, sistemleri, araç, ürün, ürünler">
+    <meta name=description content="{{urun['summary']}}">
+    <meta name=og:title property=og:title content="{{urun['name']}} - CALROV">
+    <meta name=og:description property=og:description content="{{urun['summary']}}">
+    <meta property=og:image name=og:image content="{{urun['images'][0]}}">
+    <meta property=og:url name=og:url content="https://calrovteam.com/urunler/{{urun['_id']}}">
+    <meta property=og:locale name=og:locale content=tr_TR>
+    <meta property=og:site_name name=og:site_name content=CALROV>
+    <meta name=twitter:title property=twitter:title content="{{urun['name']}} - CALROV">
+    <meta name=twitter:description property=twitter:description content="{{urun['summary']}}">
+    <meta name=twitter:image property=twitter:image content={{urun['images'][0]}}>
+    <link rel="stylesheet" href="/css/urun-bilgi.css"/>
+  </head>
+  <body>
+    <div class=container>
+      {% include './navbar.html' %}
+      <section>
+        <a style="color: white; text-decoration: none;" href="/urunler"><i class="fas fa-arrow-left"></i> Diğer Ürünlere Göz At</a><br /><br />
+        <div id="photo-gallery">
+          <img src="{{urun['images'][0]}}" alt="ürün fotoğrafı" id="gallery-viewed-photo"/>
+          <div id="photo-gallery-tiny-thumbnails">
+            {% for image in urun['images'] %}
+            <img src="{{image}}" alt="ürün fotoğrafı ikon" id="gallery_photo_{{index}}"/>
+            {% endfor %}
+          </div>
+        </div>
+        <script type="text/javascript">
+          const viewedPhoto = document.querySelector("img#gallery-viewed-photo");
+          document.querySelectorAll("div#photo-gallery-tiny-thumbnails img").forEach(i => {
+            i.addEventListener("click", () => {
+              viewedPhoto.src = i.src;
+            });
+          });
+          function checkQuantity(stock){
+            var q = document.querySelector("input#urun-adet");
+            try {
+              if((!isFinite(q.value)) || q.value.trim()==="" || q.value.includes(".")) q.value = 1;
+              else if(parseInt(q.value)>stock) q.value = stock;
+              else if(parseInt(q.value)<1) q.value = 1;
+            } catch(_e) {
+              q.value = 1;
+            }
+            return false;
+          }
+        </script>
+        <div id="urun-ad-ve-sepet">
+          <h1>{{urun['name']}}</h1>
+          <p>{{urun['summary']}}</p>
+          <input type="number" min="1" max="{{urun['stock']}}" placeholder="Adet" id="urun-adet" onchange="checkQuantity({{urun['stock']}});" onkeyup="checkQuantity({{urun['stock']}});" value="1"/>
+          <br />
+          <script type="text/javascript">
+            function sepeteEkleAdetDegistir(){
+              let recentCart = JSON.parse(localStorage.getItem("calrovCart")?localStorage.getItem("calrovCart"):"{}");
+              recentCart[{{urun['_id']}}] = document.querySelector("input#urun-adet").value;
+              let newCart = JSON.stringify(recentCart);
+              localStorage.setItem("calrovCart", newCart);
+              alert("Sepet Güncellendi!");
+              window.location.reload();
+            }
+          </script>
+          <button type="button" id="sepete-ekle-adet-degistir" onclick="sepeteEkleAdetDegistir();">Sepete Ekle</button>
+          <script type="text/javascript">
+            var quantityInCart = JSON.parse(localStorage.getItem("calrovCart"))[{{urun['_id']}}];
+            if(quantityInCart){
+              document.querySelector("input#urun-adet").value = quantityInCart;
+              document.querySelector("button#sepete-ekle-adet-degistir").textContent = "Adeti Güncelle";
+            }
+          </script>
+        </div>
+        <article>
+          {{ urun['description'] | safe }}
+        </article>
+      </section>
+      <a href="/sepet"><div id="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+      </div></a>
+      <style type="text/css">
+        div#cart-icon {
+            position: fixed;
+            z-index: 999;
+            bottom: 1em;
+            right: 1em;
+            width: 5em;
+            height: 5em;
+            border-radius: 2.5em;
+            background-color: white;
+        }
+        div#cart-icon i {
+            color: black;
+            font-size: 1.7em;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      </style>
+      {% include './footer.html' %}
+    </div>
+  </body>
+</html>

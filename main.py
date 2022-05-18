@@ -1,4 +1,7 @@
 import asyncio
+import smtplib
+import ssl
+import html
 import json
 from flask import Flask, Response, request, render_template, redirect
 import aiofiles
@@ -21,10 +24,11 @@ db_cred = {
 }
 
 mongo = AsyncIOMotorClient(
-    f"mongodb+srv://{quote(db_cred['user'])}:{quote(db_cred['password'])}@{db_cred['host']}/{db_cred['database']}?retryWrites=true&w=majority")
+    f"mongodb://{quote(db_cred['user'])}:{quote(db_cred['password'])}@{db_cred['host']}/{db_cred['database']}?retryWrites=true&w=majority")
 mongo.get_io_loop = asyncio.get_running_loop
 db = mongo.get_default_database()
 
+mailer_ctx = ssl.create_default_context()
 
 @app.before_request
 def before_request():
@@ -293,6 +297,85 @@ async def admin_blog_editor(post_id):
     if await check_user(request.headers.get("authorization"), db):
         blog_post = await db["blog"].find_one({"_id":int(post_id)})
         return render_template("admin/blogposteditor.html", post=blog_post)
+
+@app.route("/urunler")
+async def urunler_index():
+    urunler = await db["urunler"].find({}).to_list(9999999999999999999)
+    return render_template("urunler/index.html", urunler=urunler)
+
+@app.route("/urunler/<path:urun_id>")
+async def urun_bilgi(urun_id):
+    urun = await db["urunler"].find_one({"_id": int(urun_id)})
+    return render_template("urunler/urun_bilgi.html", urun=urun)
+
+@app.route("/api/createCart", methods=["POST"])
+async def createCart():
+    incoming_data = json.loads(request.data)
+    urunler = await db["urunler"].find({"_id": { "$in": list(map(lambda i: int(i), incoming_data.keys())) } }).to_list(9999999999999999999)
+    toplam_fiyat = 0
+    for i in urunler:
+        i["quantity"] = incoming_data[str(i["_id"])]
+        toplam_fiyat += float(i["price"]) * int(i["quantity"])
+    return render_template("urunler/sepet.html", urunler=urunler, toplam_fiyat=toplam_fiyat)
+
+@app.route("/api/siparisVer", methods=["POST"])
+async def siparis():
+    order_data = json.loads(request.data)
+    print(order_data)
+    order_email = f"""From: CALROV <siparisler@calrovteam.com>\nTo: CALROV <siparisler@calrovteam.com>\nSubject: Sipariş Alındı!\n
+
+Bir Sipariş Alındı!
+
+Bilgiler
+Ad Soyad: {html.escape(order_data["ad-soyad-calrov"])}
+E-Posta: {html.escape(order_data["e-mail-calrov"])}
+Telefon: {html.escape(order_data["telefon-calrov"])}
+Şehir: {html.escape(order_data["sehir-calrov"])}
+İletişim Tercihi: {"Telefonla Arama" if order_data["iletisim-tercih"]=="telefon"
+    else ("WhatsApp" if order_data["iletisim-tercih"]=="wp"
+          else ("E-Posta" if order_data["iletisim-tercih"]=="email"
+                else "?"))}
+
+Sipariş Edilen Ürünler
+"""
+    urunler = await db["urunler"].find({"_id": {
+        "$in": list(map(lambda i: int(i), order_data["cart"].keys()))
+    }}).to_list(9999999999999999999)
+    toplam_fiyat = 0
+    for i in urunler:
+        i["quantity"] = order_data["cart"][str(i["_id"])]
+        toplam_fiyat += int(i["quantity"]) * float(i["price"])
+        order_email += f"""
+{i["quantity"]} Adet "{i["name"]}"
+"""
+    order_email +=f"\nToplam Fiyat: {toplam_fiyat}₺"
+    order_email_for_customer = f"""From: CALROV <siparisler@calrovteam.com>\nTo: {html.escape(order_data["ad-soyad-calrov"])} <{html.escape(order_data["e-mail-calrov"])}>\nMIME-Version: 1.0\nSubject: Siparişiniz Alındı!\nContent-Type: text/html\n
+<div style="font-family: Helvetica, Arial, sans-serif;">
+<p>Sayın {html.escape(order_data["ad-soyad-calrov"])},</p>
+<p>Web sitemiz üzerinden vermiş olduğunuz sipariş elimize başarılı olarak ulaşmıştır.<br/>
+Siparişinizle ilgili gerekli iletişim en yakın zamanda tarafınızla tercih etmiş olduğunuz iletişim yoluyla({"Telefonla Arama" if order_data["iletisim-tercih"]=="telefon"
+    else ("WhatsApp" if order_data["iletisim-tercih"]=="wp"
+          else ("E-Posta" if order_data["iletisim-tercih"]=="email"
+                else "?"))}) sağlanacaktır.<p>
+<h3>Sipariş Edilen Ürünler:</h3>
+<ul>
+  {"".join(["<li>"+i["name"]+" ("+i["quantity"]+" adet)</li>" for i in urunler])}
+</ul>
+<h3>Toplam Ürün Fiyatı: {toplam_fiyat}₺</h3>
+<p>Bizi tercih ettiğiniz için teşekkürler.<br />
+İyi Günler Dileriz.</p>
+<p>CALROV Ekibi</p>
+</div>
+"""
+    with smtplib.SMTP_SSL(host="smtp.yandex.com", port=465, context=mailer_ctx) as mailserver:
+        mailserver.login("siparisler@calrovteam.com", os.environ["EMAIL_PASSWORD"])
+        mailserver.sendmail("siparisler@calrovteam.com", "siparisler@calrovteam.com", order_email.encode("utf-8"))
+        mailserver.sendmail("siparisler@calrovteam.com", order_data["e-mail-calrov"], order_email_for_customer.encode("utf-8"))
+    return Response(status=200)
+
+@app.route("/sepet")
+async def sepet():
+    return render_template("urunler/sepet-body.html")
 
 if __name__ == "__main__":
     # I created this try/except and if/else statements to make it work in prod. mode on Heroku and in dev. mode on my computer
