@@ -15,8 +15,3 @@ async def check_user(auth_header, db):
     user = await db["users"].find_one({"_id": int(userid)})
     return bcrypt.checkpw(password.encode("utf-8"), user["password"].encode("utf-8"))
 
-DEPRECATED_BROWSER_WARNING = "Görünüşe bakılırsa taş devrinden kalma bir tarayıcı veya Internet Explorer kullanıyorsunuz. \
-Girdiğiniz sitelerin düzgün çalışması için lütfen modern bir tarayıcıya geçiş yapınız. \
-Modern tarayıcıdan kastımız, Chromium tabanlı(Chromium, Chrome, Edge, Opera...) veya Firefox \
-tabanlı(Firefox, LibreWolf, Tor...) bir tarayıcının veya Safari'nin son sürümlerinden birine geçiş yapmanızdır. \
-Okuduğunuz için teşekkür ederiz..."

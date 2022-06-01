@@ -30,12 +30,6 @@ db = mongo.get_default_database()
 
 mailer_ctx = ssl.create_default_context()
 
-@app.before_request
-def before_request():
-    if (not request.headers.get("user-agent").startswith("Mozilla/5.0")) or request.headers.get("user-agent").find("Trident") > -1:
-        return DEPRECATED_BROWSER_WARNING
-
-
 @app.route("/")
 async def index():
     return render_template("index.html")
