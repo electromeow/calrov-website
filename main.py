@@ -24,7 +24,7 @@ db_cred = {
 }
 
 mongo = AsyncIOMotorClient(
-    f"mongodb://{quote(db_cred['user'])}:{quote(db_cred['password'])}@{db_cred['host']}/{db_cred['database']}?retryWrites=true&w=majority")
+    f"mongodb://{quote(db_cred['user'])}:{quote(db_cred['password'])}@{db_cred['host']}/{db_cred['database']}?tlsAllowInvalidCertificates=true&tls=true&retryWrites=true&w=majority")
 mongo.get_io_loop = asyncio.get_running_loop
 db = mongo.get_default_database()
 
