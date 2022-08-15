@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block headers_more %}
+<title>{{ member.name }} {{ member.surname }} - CALROV</title>
+<style>
+    @media screen and (max-width: 60em) {
+        main img {
+            width: 100%;
+            max-width: 20em;
+            border-radius: 1em;
+        }
+    }
+    @media screen and (min-width: 60em) {
+        main div#uye-aciklama {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        main img {
+            width: 20em;
+            margin-right: 1em;
+            display: inline-block;
+            border-radius: 1em;
+        }
+        main div#uye-aciklama div {
+            display: inline-block;
+        }
+    }
+</style>
+{% endblock headers_more %}
+
+{% block content %}
+<div id="uye-aciklama">
+  <img src="{{ member.pfp }}" alt="profil foto" />
+  <div>
+    <h1>{{ member.name }} {{ member.surname }}</h1>
+    <h3>{{ member.role }}</h3>
+    <p>{{ member.desc }}</p>
+  </div>
+</div>
+{% endblock content %}

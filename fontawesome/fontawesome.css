@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'Font Awesome 6 Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("fa6-Pro-Regular-400.woff2") format("woff2"), url("fa6-Pro-Regular-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Font Awesome 6 Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("fa6-Pro-Solid-900.woff2") format("woff2"), url("fa6-Pro-Solid-900.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Font Awesome 6 Pro';
+  font-style: normal;
+  font-weight: 300;
+  font-display: block;
+  src: url("fa6-Pro-Light-300.woff2") format("woff2"), url("fa6-Pro-Light-300.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Font Awesome 6 Pro';
+  font-style: normal;
+  font-weight: 100;
+  font-display: block;
+  src: url("fa6-Pro-Thin-100.woff2") format("woff2"), url("fa6-Pro-Thin-100.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("fa6-Brands-Regular-400.woff2") format("woff2"), url("fa6-Brands-Regular-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Font Awesome 6 Duotone';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("fa6-Duotone-Solid-900.woff2") format("woff2"), url("fa6-Duotone-Solid-900.ttf") format("truetype");
+}
+.far,
+.fa-regular {
+  font-family: 'Font Awesome 6 Pro' !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+.fab,
+.fa-brands {
+  font-family: 'Font Awesome 6 Brands' !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+.fas,
+.fa-solid {
+  font-family: 'Font Awesome 6 Pro' !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+}
+.fal,
+.fa-light {
+  font-family: 'Font Awesome 6 Pro' !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+}
+.fat,
+.fa-thin {
+  font-family: 'Font Awesome 6 Pro' !important;
+  font-weight: 100 !important;
+  font-style: normal !important;
+}
+.fad,
+.fa-duotone {
+  font-family: 'Font Awesome 6 Duotone' !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+}

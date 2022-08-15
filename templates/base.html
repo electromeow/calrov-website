@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../fontawesome/fontawesome.css">
+  {% block headers_more %}
+  {% endblock headers_more %}
+</head>
+<body>
+  {% block navbar %}
+  <nav>
+    <a href="/">
+        <img id="navbar-logo" src="../images/logo.png" alt="Logo" />
+        <div style="width: 1em;"></div>
+        <h1>CALROV</h1>
+    </a>
+    <ul class="center">
+      <li class="center"><a href="/haberler">Haberler</a></li>
+      <li class="center"><a href="/hakkimizda">Hakkımızda</a></li>
+      <li class="center"><a href="/sponsorluk">Sponsorluk</a></li>
+      <li class="center"><a href="/iletisim">İletişim</a></li>
+    </ul>
+    <div id="navbar-hamburger-icon" onclick="document.querySelector('#navbar-hamburger-icon').classList.toggle('opened'); document.querySelector('nav ul').classList.toggle('opened');">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+  {% endblock navbar %}
+  <main>
+    {% block content %}
+    {% endblock content %}
+  </main>
+  <footer>
+    <img src="../images/logo.png" alt="logo" />
+    <div>
+      CALROV, 2022
+      <br />
+      <a href="https://instagram.com/calrovteam" target="_blank"><i class="fab">&#xf16d</i> @calrovteam</a>
+      <br />
+      <a href="mailto:iletisim@calrovteam.com"><i class="fat">&#xf0e0</i> iletisim@calrovteam.com</a>
+    </div>
+  </footer>
+</body>
+</html>

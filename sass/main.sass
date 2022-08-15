@@ -1,0 +1,136 @@
+@use 'colors' as *
+@use 'commons' as *
+body, html
+  margin: 0
+  color: $fg-primary
+  padding: 0
+  background-color: $bg-primary
+  font-family: Roboto, sans-serif
+body
+  padding: 0 5%
+  font-weight: 100
+main::after
+  content: ""
+  height: 4em
+  display: block
+main::before
+  content: ""
+  height: 5em
+  display: block
+
+main
+  min-height: calc(100vh - 8em)
+footer
+  padding: 1em
+  display: flex
+  flex-direction: row
+  align-items: center
+  img
+    @include wh(5em, 5em)
+  i
+    font-size: 1.2em
+  a
+    color: $fg-primary
+nav
+  @include wh(90%, 4em)
+  display: flex
+  position: fixed
+  color: $fg-primary
+  background-color: rgba(17,17,17,0.7)
+  backdrop-filter: blur(5px)
+  -webkit-backdrop-filter: blur(5px)
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  padding: 0
+  margin: 0
+  a
+    text-decoration: none
+    color: $fg-primary
+    display: flex
+    height: 100%
+    flex-direction: row
+    img#navbar-logo
+      height: 100%
+    h1
+      font-weight: 400
+
+  @media screen and (min-width: 52em)
+    div#navbar-hamburger-icon
+      display: none
+    ul
+      display: flex
+      height: 100%
+      margin: 0.5em
+      padding: 0.5em
+      list-style: none
+      justify-content: right
+      align-items: center
+      flex-direction: row
+      li
+        transition: all 0.2s ease
+        a
+          margin: 0.5em
+          padding: 0.5em
+          text-decoration: none
+          border-radius: 0.5em
+          font-size: 1.15em
+          font-weight: 300
+          color: $fg-primary
+      li:hover
+        a
+          background-color: $fg-secondary
+          transition: all 0.2s ease
+  @media screen and (max-width: 52em)
+    div#navbar-hamburger-icon
+      transition: all 0.3s ease
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      height: 1.2em
+      span
+        transition: all 0.3s ease
+        width: 1.5em
+        height: 0.1em
+        background-color: $fg-primary
+    div#navbar-hamburger-icon.opened
+      justify-content: center
+      align-items: center
+      transition: all 0.3s ease
+      :nth-child(1)
+        position: absolute
+        transition: all 0.3s ease
+        transform-origin: center
+        transform: rotate(45deg)
+      :nth-child(3)
+        transition: all 0.3s ease
+        position: absolute
+        transform-origin: center
+        transform: rotate(-45deg)
+      :nth-child(2)
+        transition: all 0.3s ease
+        opacity: 0
+    ul
+      max-height: 0
+      width: 100%
+      font-weight: 300
+      flex-direction: column
+      position: fixed
+      top: 4em
+      background-color: $fg-primary
+      padding: 0
+      left: 0
+      border-radius: 0 0 1em 1em
+      overflow: hidden
+      transition: all 0.3s ease
+      list-style: none
+      li
+        a
+          text-decoration: none
+          font-size: 1.2em
+          color: $bg-primary
+    ul.opened
+      transition: all 0.3s ease
+      max-height: 8em
+      padding: 1em 0
+

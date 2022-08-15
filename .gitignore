@@ -1,0 +1,12 @@
+debug/
+target/
+Cargo.lock
+**/*.rs.bk
+.idea
+*.iml
+out
+gen
+.DS_Store
+.AppleDouble
+.LSOverride
+css/

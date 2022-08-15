@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block headers_more %}
+<title>Sponsorluk - CALROV</title>
+<link rel="stylesheet" href="css/sponsorluk.css" />
+{% endblock headers_more %}
+
+{% block content %}
+<h1>Sponsorluk</h1>
+<p>Takımımız araçları geliştirmek için bütçesini tamamen destekçiler ve sponsorlardan oluşturmaktadır.</p>
+<p>Son zamanlardaki elektronik komponent kıtlığı, dünya geneli enflasyon ve döviz kurundaki artıştan dolayı
+  araçlarımızı geliştirmenin maliyeti gitgide artmıştır. Ayrıca yurtdışı yarışmalara katılırken
+  gereken yol ve konaklama masrafları da büyük bir maliyet oluşturmaktadır.</p>
+<p>Takımımızı desteklemek istiyorsanız, gerek aracı geliştirmede, gerek yarışmalara katılımda gereken
+  masraflarımızı karşılayabilirsiniz.
+</p>
+<p>Aşağıda şu ana dek takımımıza sponsorluk sağlayan kurumlar listelenmektedir.</p>
+
+{% for year in years %}
+  <h1>{{ year }}</h1>
+  <h2 style="color: silver;">Platin Sponsorlar</h2>
+  <div class="sponsors">
+  {% for sponsor in sponsors[loop.index0][0] %}
+      <div class="sponsor">
+        <a href="{{sponsor.website}}">
+          <img alt="sponsor logo" src="{{sponsor.logo}}" />
+          <h4>{{ sponsor.name }}</h4>
+        </a>
+      </div>
+  {% endfor %}
+  </div>
+  <h2 style="color: gold;">Altın Sponsorlar</h2>
+  <div class="sponsors">
+  {% for sponsor in sponsors[loop.index0][1] %}
+    <div class="sponsor">
+      <a href="{{sponsor.website}}">
+        <img alt="sponsor logo" src="{{sponsor.logo}}" />
+        <h4>{{ sponsor.name }}</h4>
+      </a>
+    </div>
+  {% endfor %}
+  </div>
+  <h2 style="color: gray;">Gümüş Sponsorlar</h2>
+  <div class="sponsors">
+  {% for sponsor in sponsors[loop.index0][2] %}
+    <div class="sponsor">
+      <a href="{{sponsor.website}}">
+        <img alt="sponsor logo" src="{{sponsor.logo}}" />
+        <h4>{{ sponsor.name }}</h4>
+      </a>
+    </div>
+  {% endfor %}
+  </div>
+{% endfor %}
+
+{% endblock content %}

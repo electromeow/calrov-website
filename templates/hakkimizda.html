@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block headers_more %}
+<title>Hakkımızda - CALROV</title>
+<link rel="stylesheet" href="/css/hakkimizda.css">
+{% endblock headers_more %}
+{% block content %}
+<p>
+  CALROV, Cağaloğlu Anadolu Lisesi bünyesinde Ocak 2021’de İnsansız Su Altı Araçları
+  üzerine kurulmuş bir takımdır.
+</p>
+<p>
+  İlk sene 9 kişilik takım Teknofest İnsansız Su
+  Altı Sistemleri Yarışmasında Temel Kategoride aracı Talay ile Türkiye 1.liği ve En Özgün Yazılım ödülü ile tamamlamıştır.
+</p>
+<p>
+  Takımımız sonraki sene Bükrek ve Sangal isimli iki araç geliştirmiştir ve içlerinden Bükrek, Teknofest'te En Özgün
+  Tasarım ödülü almıştır. Ayrıca Genç Başarı Eğitim Vakfı'nın düzenlediği Gençbizz Lise Girişimcilik Yarışmasına
+  bir girişim olarak katılmıştır ve Türkiye Finalinde En İnovatif Ürün Ödülünü kazanmıştır.
+  Takımımız uluslararası arenada ülkemizi temsil etmek amacıyla Singapur AUV Yarışmasına
+  (<a href="https://sauvc.org">Singapore AUV Challenge</a>) başvurmuştur ve yarışmaya katılmaya
+  hak kazanan dünyadaki tek lise takımı ve Türkiye'deki 5 takımdan biri olmuştur.
+</p>
+Takımımız faaliyetlerini yazılım, mekanik ve elektronik ekibi olmak üzere üç ekibe ayrılarak yürütmektedir.
+<br />
+<h2>Takım Üyeleri</h2>
+<br />
+<div class="members">
+{% for member in members %}
+  <a href="/uyeler/{{ member._id }}">
+    <div class="member">
+      <img src="{{ member.pfp }}" alt="üye profil foto" />
+      <p>{{ member.name }} {{ member.surname }} <br /> {{ member.role }}</p>
+    </div>
+  </a>
+{% endfor %}
+</div>
+{% endblock content %}

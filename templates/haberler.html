@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block headers_more %}
+<link rel="stylesheet" href="/css/haberler.css" />
+<link rel="stylesheet" href="/css/paginator.css" />
+{% endblock headers_more %}
+
+{% block content %}
+{% for haber in haberler %}
+<div id="haberler">
+  <a class="link-not-highlighted" href="{{ haber.link }}"><div class="haber">
+    <img src="{{ haber.thumbnail }}" alt="haber kapak resmi" />
+    <div class="haber-yazilar">
+      <h1>{{ haber.title }}</h1>
+      <p>{{ haber.summary }}</p>
+    </div>
+  </div></a>
+</div>
+{% endfor %}
+<div id="paginator">
+  {% if page == 1 %}
+  <i class="fat disabled-paginator-button">&#xf053</i>
+  {% else %}
+  <a class="link-not-highlighted" href="/haberler?p={{ page-1 }}"><i class="fat">&#xf053</i></a>
+  {% endif %}
+  <span id="paginator-current-page">{{ page }}</span>
+  {% if is_last_page %}
+  <i class="fat disabled-paginator-button">&#xf054</i>
+  {% else %}
+  <a class="link-not-highlighted" href="/haberler?p={{ page+1 }}"><i class="fat">&#xf054</i></a>
+  {% endif %}
+</div>
+{% endblock content %}

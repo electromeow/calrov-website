@@ -1,0 +1,30 @@
+@use 'colors' as *
+@use 'commons'
+div.members
+  display: flex
+  flex-wrap: wrap
+  div.member
+    width: 18em
+    display: flex
+    padding: 0.5em
+    margin: 0.5em
+    flex-direction: row
+    align-items: center
+    @include commons.border($fg-primary)
+    img
+      width: 6em
+      border-radius: 0.5em
+      margin-right: 0.5em
+      transition: all 0.3s ease
+    p
+      transition: all 0.3s ease
+  div.member:hover
+    p
+      color: $fg-secondary
+      transition: all 0.3s ease
+    img
+      transition: all 0.3s ease
+      opacity: 60%
+a
+  text-decoration: none
+  color: $fg-primary

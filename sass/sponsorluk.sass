@@ -1,0 +1,27 @@
+@use 'colors' as *
+div.sponsors
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  div.sponsor
+    display: flex
+    flex-direction: row
+    align-items: center
+    width: 10em
+    padding: 1em
+    a
+      text-decoration: none
+      color: white
+    img
+      width: 10em
+      transition: all 0.3s ease
+    h4
+      text-align: center
+      transition: all 0.3s ease
+  div.sponsor:hover
+    img
+      opacity: 60%
+      transition: all 0.3s ease
+    h4
+      color: $fg-secondary
+      transition: all 0.3s ease

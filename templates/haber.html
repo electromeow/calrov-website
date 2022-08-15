@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="margin-bottom: 0;">{{ title }}</h1>
+<i style="margin-bottom: 1em; display: block;">{{ date }}</i>
+<article>
+  {{ content | safe }}
+</article>
+{% endblock content %}
