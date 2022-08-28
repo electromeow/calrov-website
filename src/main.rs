@@ -156,7 +156,7 @@ async fn img(filename: &str) -> (ContentType, Vec<u8>) {
 }
 #[get("/favicon.ico")]
 async fn favicon() -> (ContentType, Vec<u8>) {
-    static_file(PathBuf::new("favicon.ico")).await
+    static_file(PathBuf::from("favicon.ico")).await
 }
 #[launch]
 async fn rocket() -> _ {
