@@ -154,14 +154,16 @@ async fn member_info(templating: &State<Mutex<Tera>>, db: &State<mongodb::Databa
 async fn img(filename: &str) -> (ContentType, Vec<u8>) {
     static_file(Path::new("images/").join(filename)).await
 }
-
+#[get("/favicon.ico")]
+async fn favicon() -> (ContentType, Vec<u8>) -> {
+    static_file(PathBuf::new("favicon.ico")).await
+}
 #[launch]
 async fn rocket() -> _ {
     let templating = Tera::new("templates/**/*.html").unwrap_or_else(|e| {
         eprintln!("Can't create Tera instance: {}", e);
         std::process::exit(1);
     });
-    // mongodb+srv://admin:admin@master.qdoxx.mongodb.net/calrovwebsite?retryWrites=true&w=majority
     let mongo_uri = std::env::var("MONGO_URI").unwrap_or_else(|_e| {
         eprintln!("MONGO_URI environment variable not defined or isn't accessible!");
         std::process::exit(1);
@@ -174,5 +176,5 @@ async fn rocket() -> _ {
     rocket::build()
         .manage(Mutex::new(templating))
         .manage(db)
-        .mount("/", routes![index,css,fa, img, iletisim,sponsorluk,hakkimizda,haberler, member_info, haber])
+        .mount("/", routes![index,css,fa, img, iletisim,sponsorluk,hakkimizda,haberler, member_info, haber, favicon])
 }
